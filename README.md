@@ -7,6 +7,8 @@
 Links from the original HomeMirror
 ===
 
+[The original HomeMirror](https://github.com/HannahMitt/HomeMirror)
+
 The Android APP of the original project
 [Google Play Link](https://play.google.com/store/apps/details?id=com.morristaedt.mirror)
 
