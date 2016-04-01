@@ -1,8 +1,6 @@
 # HomeMirror
 
-
-
-
+HomeMirror Project written by [Lily](https://github.com/lilyheart) and [Lee](https://github.com/lgladsden2053) for a CIS111B Project under [Dr. Martin](https://github.com/kmartinphd).
 
 Links from the original HomeMirror
 ===
