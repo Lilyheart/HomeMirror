@@ -19,6 +19,7 @@ public class VerticalTextClock extends TextClock {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+        //noinspection SuspiciousNameCombination
         super.onMeasure(heightMeasureSpec, widthMeasureSpec);
         setMeasuredDimension(getMeasuredHeight(), getMeasuredWidth());
     }
