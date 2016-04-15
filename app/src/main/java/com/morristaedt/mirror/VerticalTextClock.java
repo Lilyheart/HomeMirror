@@ -12,16 +12,9 @@ import android.widget.TextClock;
  * Edited version of VerticalTextView.java
  */
 public class VerticalTextClock extends TextClock {
-    final boolean topDown;
 
     public VerticalTextClock(Context context, AttributeSet attrs){
         super(context, attrs);
-        final int gravity = getGravity();
-        if(Gravity.isVertical(gravity) && (gravity&Gravity.VERTICAL_GRAVITY_MASK) == Gravity.BOTTOM) {
-            setGravity((gravity&Gravity.HORIZONTAL_GRAVITY_MASK) | Gravity.TOP);
-            topDown = false;
-        }else
-            topDown = true;
     }
 
     @Override
@@ -38,14 +31,8 @@ public class VerticalTextClock extends TextClock {
 
         canvas.save();
 
-        if(topDown){
-            canvas.translate(getWidth(), 0);
-            canvas.rotate(90);
-        }else {
-            canvas.translate(0, getHeight());
-            canvas.rotate(-90);
-        }
-
+        canvas.translate(getWidth(), 0);
+        canvas.rotate(90);
 
         canvas.translate(getCompoundPaddingLeft(), getExtendedPaddingTop());
 
