@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DigitalClock xmlns:android="http://schemas.android.com/apk/res/android"
+<com.morristaedt.mirror.VerticalTextClock xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MirrorText"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:format12Hour="h:mm"
+    android:format12Hour="h:mm aaa"
     android:includeFontPadding="false"
     android:padding="0dp"
     android:textSize="@dimen/mirror_clock_text_size" />
