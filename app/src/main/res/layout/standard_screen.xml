@@ -6,6 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Due to rotation of text, entries are backwards! -->
+    <!--         The bottom entry is on the top          -->
+
+    <com.morristaedt.mirror.VerticalTextView android:id="@+id/calendar_details"
+        style="@style/MirrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:lines="1"
+        tools:text="11:00-12:00 ~ 10 Downing Street" />
+
+    <com.morristaedt.mirror.VerticalTextView android:id="@+id/calendar_title"
+        style="@style/MirrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
+        android:lines="1"
+        tools:text="Very VERY VERY VERY VERY VERY VERY VERY important meeting" />
+
+    <com.morristaedt.mirror.VerticalTextView android:id="@+id/weather_summary"
+        style="@style/MirrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:text="Partly Cloudy" />
 
     <include layout="@layout/clock"
         android:layout_width="wrap_content"
@@ -16,45 +41,8 @@
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:gravity="end"
         tools:text="Sunday the 22nd"/>
 
-
-    <com.morristaedt.mirror.VerticalTextView
-        android:visibility="gone"
-        android:id="@+id/weather_summary"
-        style="@style/MirrorText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        tools:text="Partly Cloudy" />
-
-    <com.morristaedt.mirror.VerticalTextView
-        android:visibility="gone"
-        android:id="@+id/calendar_title"
-        style="@style/MirrorText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mirror_item_spacing"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:includeFontPadding="false"
-        android:singleLine="true"
-        tools:text="Very important meeting" />
-    <!--android:visibility="gone"-->
-
-    <com.morristaedt.mirror.VerticalTextView
-        android:visibility="gone"
-        android:id="@+id/calendar_details"
-        style="@style/MirrorText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:includeFontPadding="false"
-        android:singleLine="true"
-        tools:text="11:00-12:00 ~ 10 Downing Street" />
-    <!--android:visibility="gone"-->
+    <!-- android:visibility="gone" -->
 
 </LinearLayout>
