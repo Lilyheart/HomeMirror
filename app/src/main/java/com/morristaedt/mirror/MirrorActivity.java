@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
-import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
@@ -175,13 +174,6 @@ public class MirrorActivity extends ActionBarActivity {
     }
 
     private void setViewState() {
-        String birthday = BirthdayModule.getBirthday();
-        if (TextUtils.isEmpty(birthday)) {
-            mBirthdayText.setVisibility(View.GONE);
-        } else {
-            mBirthdayText.setVisibility(View.VISIBLE);
-            mBirthdayText.setText(getString(R.string.happy_birthday, birthday));
-        }
 
         mDayText.setText(DayModule.getDay());
 //        mHelloText.setText(TimeModule.getTimeOfDayWelcome(getResources())); // not in current design

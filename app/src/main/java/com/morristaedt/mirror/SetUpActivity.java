@@ -158,7 +158,6 @@ public class SetUpActivity extends Activity {
         mConfigSettings.setShowBikingHint(mBikingCheckbox.isChecked());
         mConfigSettings.setShowMoodDetection(mMoodDetectionCheckbox.isChecked());
         mConfigSettings.setShowNextCalendarEvent(mShowNextCaledarEventCheckbox.isChecked());
-        mConfigSettings.setShowNewsHeadline(mShowNewsHeadlineCheckbox.isChecked());
         mConfigSettings.setXKCDPreference(mXKCDCheckbox.isChecked(), mXKCDInvertCheckbox.isChecked());
 
         if (mLocation == null) {
@@ -167,6 +166,5 @@ public class SetUpActivity extends Activity {
             mConfigSettings.setLatLon(String.valueOf(mLocation.getLatitude()), String.valueOf(mLocation.getLongitude()));
         }
 
-        mConfigSettings.setStockTickerSymbol(mStockTickerSymbol.getText().toString());
     }
 }
