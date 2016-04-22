@@ -24,9 +24,7 @@ import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.modules.NewsModule;
 import com.morristaedt.mirror.modules.XKCDModule;
-import com.morristaedt.mirror.modules.YahooFinanceModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
-import com.morristaedt.mirror.requests.YahooStockResponse;
 import com.morristaedt.mirror.utils.WeekUtil;
 import com.squareup.picasso.Picasso;
 
@@ -60,18 +58,6 @@ public class MirrorActivity extends ActionBarActivity {
             } else {
                 Picasso.with(MirrorActivity.this).load(url).into(mXKCDImage);
                 mXKCDImage.setVisibility(View.VISIBLE);
-            }
-        }
-    };
-
-    private YahooFinanceModule.StockListener mStockListener = new YahooFinanceModule.StockListener() {
-        @Override
-        public void onNewStockPrice(YahooStockResponse.YahooQuoteResponse quoteResponse) {
-            if (quoteResponse == null) {
-                mStockText.setVisibility(View.GONE);
-            } else {
-                mStockText.setVisibility(View.VISIBLE);
-                mStockText.setText("$" + quoteResponse.symbol + " $" + quoteResponse.LastTradePriceOnly);
             }
         }
     };
@@ -249,12 +235,6 @@ public class MirrorActivity extends ActionBarActivity {
         } else {
             mCalendarTitleText.setVisibility(View.GONE);
             mCalendarDetailsText.setVisibility(View.GONE);
-        }
-
-        if (mConfigSettings.showStock() && (ConfigurationSettings.isDemoMode() || WeekUtil.isWeekdayAfterFive())) {
-            YahooFinanceModule.getStockForToday(mConfigSettings.getStockTickerSymbol(), mStockListener);
-        } else {
-            mStockText.setVisibility(View.GONE);
         }
 
         if (mConfigSettings.showMoodDetection()) {
