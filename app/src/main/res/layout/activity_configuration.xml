@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_margin"
                 android:layout_marginTop="0dp"
-                android:text="@string/farenheit" />
+                android:text="@string/fahrenheit" />
 
         </RadioGroup>
 

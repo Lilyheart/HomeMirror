@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HomeMirror</string>
 
-    <string name="default_mirror_mirror">Mirror, mirror on the wall. Who is the prettiest of them all.</string>
+    <string name="default_mirror_mirror">Mirror, mirror \non the wall. \nWho is the prettiest \nof them all.</string>
 
     <!-- Time module -->
     <string name="good_morning">Good morning, %s</string>
@@ -24,7 +24,7 @@
     <string name="location_error">Couldn\'t detect a recent location</string>
     <string name="temperature">Temperature</string>
     <string name="celsius">Celsius</string>
-    <string name="farenheit">Farenheit</string>
+    <string name="fahrenheit">Fahrenheit</string>
     <string name="set_up">Set Up</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
