@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ * TODO : This module is currently never used!  Integrate or remove.
  */
 public class TimeModule {
 

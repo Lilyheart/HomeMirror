@@ -16,6 +16,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by akodiakson on 9/13/15.
+ *
  */
 public class MoodModule {
     private static final String TAG = "MoodModule";

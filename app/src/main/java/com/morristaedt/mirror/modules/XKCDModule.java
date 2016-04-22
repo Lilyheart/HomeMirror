@@ -17,6 +17,7 @@ import retrofit.RetrofitError;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class XKCDModule {
 
@@ -27,7 +28,6 @@ public class XKCDModule {
     /**
      * Fetch the the latest xkcd comic, but only show it if its new today
      *
-     * @param listener
      */
     public static void getXKCDForToday(final XKCDListener listener) {
         new AsyncTask<Void, Void, XKCDResponse>() {
