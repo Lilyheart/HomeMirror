@@ -51,7 +51,7 @@
 
         <activity
             android:name=".MonitorScreen"
-            android:label="@string/title_activity_monitor_screen"></activity>
+            android:label="@string/title_activity_monitor_screen" />
     </application>
 
 </manifest>
