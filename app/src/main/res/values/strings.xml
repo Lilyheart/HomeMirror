@@ -1,28 +1,18 @@
 <resources>
     <string name="app_name">HomeMirror</string>
 
-    <string name="default_mirror_mirror">Mirror, mirror on the wall. Hannah is the prettiest of them all.</string>
-
-    <!-- Owners -->
-    <string name="owners">Hannah and Andy</string>
+    <string name="default_mirror_mirror">Mirror, mirror on the wall. Who is the prettiest of them all.</string>
 
     <!-- Time module -->
     <string name="good_morning">Good morning, %s</string>
     <string name="good_afternoon">Good afternoon, %s</string>
     <string name="good_evening">Good evening, %s</string>
     <string name="late">You\'re up late, %s</string>
-    <string name="bedtime">Good evening, %s\n\nIt\'s Hannah\'s bedtime.</string>
+    <string name="bedtime">Good evening, %s\n\nIt\'s Your\'s bedtime.</string>
 
     <!-- Forecast module -->
     <string name="bike_today">Bike Today</string>
     <string name="no_bike_today">Don\'t Bike Today</string>
-
-    <!--  Birthday module -->
-    <string name="happy_birthday">Happy Birthday, %s!</string>
-
-    <!-- Chores module -->
-    <string name="water_plants">Water Plants</string>
-    <string name="grocery_list">Grocery List</string>
 
     <!-- Mood module -->
     <string name="it_gets_better">Cheer up, bud</string>
@@ -31,6 +21,10 @@
 
     <!-- Set up -->
     <string name="location">Location</string>
+    <string name="location_error">Couldn't detect a recent location</string>
+    <string name="temperature">Temperature</string>
+    <string name="celsius">Celsius</string>
+    <string name="farenheit">Farenheit</string>
     <string name="set_up">Set Up</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -39,12 +33,8 @@
     <string name="show_xkcd">Show new xkcd</string>
     <string name="invert_colors">Invert comic colors</string>
     <string name="show_calendar_event">Show next calendar event</string>
-    <string name="stock">Stock</string>
-    <string name="ticker_symbol">Ticker symbol, i.e. GOOG</string>
-    <string name="show_headline">Show BBC headline</string>
     <string name="found_location">Found location</string>
     <string name="mood_explanation">Uses the front facing camera to read your expression</string>
-    <string name="stock_description">Displays on weekdays if the stock swings more than 3%</string>
     <string name="biking_hint">Show biking weather hint</string>
     <string name="how_to_stop">To get back to Set Up and stop mirror updates, swipe up from bottom of launched mirror, and press Back.</string>
     <string name="title_activity_monitor_screen">Monitor Screen</string>
