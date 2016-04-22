@@ -67,9 +67,6 @@ public class SetUpActivity extends Activity {
         mShowNextCaledarEventCheckbox = (CheckBox) findViewById(R.id.calendar_checkbox);
         mShowNextCaledarEventCheckbox.setChecked(mConfigSettings.showNextCalendarEvent());
 
-        mShowNewsHeadlineCheckbox = (CheckBox) findViewById(R.id.headline_checkbox);
-        mShowNewsHeadlineCheckbox.setChecked(mConfigSettings.showNewsHeadline());
-
         mXKCDCheckbox = (CheckBox) findViewById(R.id.xkcd_checkbox);
         mXKCDCheckbox.setChecked(mConfigSettings.showXKCD());
 
@@ -84,9 +81,6 @@ public class SetUpActivity extends Activity {
 
         mLocationView = findViewById(R.id.location_view);
         setUpLocationMonitoring();
-
-        mStockTickerSymbol = (EditText) findViewById(R.id.stock_name);
-        mStockTickerSymbol.setText(mConfigSettings.getStockTickerSymbol());
 
         findViewById(R.id.launch_button).setOnClickListener(new View.OnClickListener() {
             @Override
