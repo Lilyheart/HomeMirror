@@ -21,7 +21,7 @@
 
     <!-- Set up -->
     <string name="location">Location</string>
-    <string name="location_error">Couldn't detect a recent location</string>
+    <string name="location_error">Couldn\'t detect a recent location</string>
     <string name="temperature">Temperature</string>
     <string name="celsius">Celsius</string>
     <string name="farenheit">Farenheit</string>
