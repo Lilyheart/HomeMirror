@@ -3,13 +3,13 @@ package com.morristaedt.mirror.configuration;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.morristaedt.mirror.BuildConfig;
 import com.morristaedt.mirror.requests.ForecastRequest;
 
 /**
  * Created by HannahMitt on 9/26/15.
+ *
  */
 public class ConfigurationSettings {
 
@@ -150,7 +150,6 @@ public class ConfigurationSettings {
     /**
      * Whether we're ignoring timing rules for features
      *
-     * @return
      */
     public static boolean isDemoMode() {
         return DEMO_MODE;
