@@ -4,6 +4,7 @@ import retrofit.http.GET;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public interface XKCDRequest {
 

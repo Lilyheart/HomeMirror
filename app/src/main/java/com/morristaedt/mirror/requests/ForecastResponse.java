@@ -5,11 +5,9 @@ import java.util.Calendar;
 
 /**
  * Created by HannahMitt on 8/23/15.
+ * TODO: Find out if forecast is already integrated.  Integrate if not or remove!
  */
 public class ForecastResponse {
-
-    float latitude;
-    float longitude;
 
     public ForecastCurrently currently;
     public ForecastHourly hourly;
@@ -24,16 +22,12 @@ public class ForecastResponse {
     }
 
     public class ForecastHourly {
-        String summary;
         public ArrayList<Hour> data;
     }
 
     public class Hour {
         public long time; // in seconds
-        public String summary;
-        public String precipType;
         public float precipProbability;
-        public float temperature;
 
         public Calendar getCalendar() {
             Calendar calendar = Calendar.getInstance();
