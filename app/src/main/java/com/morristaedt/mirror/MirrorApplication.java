@@ -9,6 +9,7 @@ import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class MirrorApplication extends Application {
 

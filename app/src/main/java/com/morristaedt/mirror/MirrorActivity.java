@@ -6,7 +6,6 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -28,18 +27,12 @@ import java.lang.ref.WeakReference;
 
 public class MirrorActivity extends ActionBarActivity {
 
-    @NonNull
     private ConfigurationSettings mConfigSettings;
 
-    private TextView mBirthdayText;
     private TextView mDayText;
     private TextView mWeatherSummary;
-    private TextView mHelloText;
     private TextView mBikeTodayText;
-    private TextView mStockText;
     private TextView mMoodText;
-    private View mWaterPlants;
-    private View mGroceryList;
     private ImageView mXKCDImage;
     private MoodModule mMoodModule;
     private TextView mCalendarTitleText;
@@ -130,14 +123,9 @@ public class MirrorActivity extends ActionBarActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mBirthdayText = (TextView) findViewById(R.id.birthday_text);
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
-        mHelloText = (TextView) findViewById(R.id.hello_text);
-        mWaterPlants = findViewById(R.id.water_plants);
-        mGroceryList = findViewById(R.id.grocery_list);
         mBikeTodayText = (TextView) findViewById(R.id.can_bike);
-        mStockText = (TextView) findViewById(R.id.stock_text);
         mMoodText = (TextView) findViewById(R.id.mood_text);
         mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
         mCalendarTitleText = (TextView) findViewById(R.id.calendar_title);

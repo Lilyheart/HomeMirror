@@ -3,8 +3,6 @@ package com.morristaedt.mirror;
 import android.os.Bundle;
 import android.app.Activity;
 
-import com.morristaedt.mirror.R;
-
 public class MonitorScreen extends Activity {
 
     @Override
