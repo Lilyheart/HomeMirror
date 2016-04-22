@@ -164,8 +164,6 @@ public class MirrorActivity extends ActionBarActivity {
     private void setViewState() {
 
         mDayText.setText(DayModule.getDay());
-//        mHelloText.setText(TimeModule.getTimeOfDayWelcome(getResources())); // not in current design
-
         // Get the API key for whichever weather service API key is available
         // These should be declared as a string in xml
         int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
