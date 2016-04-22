@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
-import com.morristaedt.mirror.modules.ChoresModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
@@ -186,9 +185,6 @@ public class MirrorActivity extends ActionBarActivity {
 
         mDayText.setText(DayModule.getDay());
 //        mHelloText.setText(TimeModule.getTimeOfDayWelcome(getResources())); // not in current design
-
-        mWaterPlants.setVisibility(ChoresModule.waterPlantsToday() ? View.VISIBLE : View.GONE);
-        mGroceryList.setVisibility(ChoresModule.makeGroceryListToday() ? View.VISIBLE : View.GONE);
 
         // Get the API key for whichever weather service API key is available
         // These should be declared as a string in xml
