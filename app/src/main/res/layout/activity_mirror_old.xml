@@ -5,14 +5,14 @@
     android:gravity="right"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/birthday_text"
-        style="@style/MirrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/mirror_birthday_text_size"
-        android:visibility="gone"
-        tools:text="Happy Birthday Andy!" />
+    <!--<TextView-->
+        <!--android:id="@+id/birthday_text"-->
+        <!--style="@style/MirrorText"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/mirror_birthday_text_size"-->
+        <!--android:visibility="gone"-->
+        <!--tools:text="Happy Birthday Andy!" />-->
 
     <TextView
         android:id="@+id/day_text"
@@ -89,47 +89,47 @@
             tools:text="Don't Bike Today"
             tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/water_plants"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/air_plant"
-            android:text="@string/water_plants"
-            android:visibility="gone"
-            tools:visibility="visible" />
+        <!--<TextView-->
+            <!--android:id="@+id/water_plants"-->
+            <!--style="@style/MirrorListText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableRight="@drawable/air_plant"-->
+            <!--android:text="@string/water_plants"-->
+            <!--android:visibility="gone"-->
+            <!--tools:visibility="visible" />-->
 
-        <TextView
-            android:id="@+id/grocery_list"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/grocery_bag"
-            android:text="@string/grocery_list"
-            android:visibility="gone"
-            tools:visibility="visible" />
+        <!--<TextView-->
+            <!--android:id="@+id/grocery_list"-->
+            <!--style="@style/MirrorListText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableRight="@drawable/grocery_bag"-->
+            <!--android:text="@string/grocery_list"-->
+            <!--android:visibility="gone"-->
+            <!--tools:visibility="visible" />-->
 
-        <TextView
-            android:id="@+id/news_headline"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:visibility="gone"
-            tools:text="A news headline"
-            tools:visiblity="visible" />
+        <!--<TextView-->
+            <!--android:id="@+id/news_headline"-->
+            <!--style="@style/MirrorListText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:ellipsize="marquee"-->
+            <!--android:marqueeRepeatLimit="marquee_forever"-->
+            <!--android:singleLine="true"-->
+            <!--android:visibility="gone"-->
+            <!--tools:text="A news headline"-->
+            <!--tools:visiblity="visible" />-->
 
-        <TextView
-            android:id="@+id/stock_text"
-            style="@style/MirrorListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@drawable/stock"
-            android:visibility="gone"
-            tools:text="$ETSY $13.46"
-            tools:visibility="gone" />
+        <!--<TextView-->
+            <!--android:id="@+id/stock_text"-->
+            <!--style="@style/MirrorListText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableRight="@drawable/stock"-->
+            <!--android:visibility="gone"-->
+            <!--tools:text="$ETSY $13.46"-->
+            <!--tools:visibility="gone" />-->
 
         <TextView
             android:id="@+id/mood_text"
