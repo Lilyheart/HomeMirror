@@ -60,7 +60,8 @@ public class XKCDModule {
 
             private boolean isTodaysXKCD(@NonNull XKCDResponse xkcdResponse) {
                 Calendar today = Calendar.getInstance();
-                return xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR);
+                //TODO uncomment original return:: return xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR);
+                return true;
             }
         }.execute();
 

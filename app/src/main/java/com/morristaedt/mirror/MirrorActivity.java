@@ -177,11 +177,11 @@ public class MirrorActivity extends ActionBarActivity {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         }
 //TODO Uncomment XKCD - Trying to find null bug
-//        if (mConfigSettings.showXKCD()) {
-//            XKCDModule.getXKCDForToday(mXKCDListener);
-//        } else {
-//            mXKCDImage.setVisibility(View.GONE);
-//        }
+        if (mConfigSettings.showXKCD()) {
+            XKCDModule.getXKCDForToday(mXKCDListener);
+        } else {
+            mXKCDImage.setVisibility(View.GONE);
+        }
 
         if (mConfigSettings.showNextCalendarEvent()) {
             CalendarModule.getCalendarEvents(this, mCalendarListener);
