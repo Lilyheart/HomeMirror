@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HomeMirror</string>
 
-    <string name="default_mirror_mirror">Mirror, mirror \non the wall. \nWho is the prettiest \nof them all.</string>
+    <string name="default_mirror_mirror">Mirror, mirror \non the wall. \nWho is the fairest \nof them all.</string>
 
     <!-- Time module -->
     <string name="good_morning">Good morning, %s</string>
