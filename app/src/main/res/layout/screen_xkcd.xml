@@ -11,5 +11,13 @@
         android:rotation="90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <!--TODO: Remove button - only for testing-->
+    <Button
+        android:id="@+id/xkcd_button"
+        android:rotation="90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/launch"
+        android:textSize="@dimen/configuration_text_size" />
 
 </LinearLayout>

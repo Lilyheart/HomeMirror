@@ -46,8 +46,8 @@ public class MirrorActivity extends ActionBarActivity {
             if (TextUtils.isEmpty(url)) {
                 mXKCDImage.setVisibility(View.GONE);
             } else {
-                Picasso.with(MirrorActivity.this).load(url).into(mXKCDImage);
-                mXKCDImage.setVisibility(View.VISIBLE);
+//FIXME                Picasso.with(MirrorActivity.this).load(url).into(mXKCDImage);
+//FIXME                mXKCDImage.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -142,7 +142,7 @@ public class MirrorActivity extends ActionBarActivity {
                     0, 0, 0, 1.0f, 0 //alpha
             };
             ColorFilter colorFilterNegative = new ColorMatrixColorFilter(colorMatrixNegative);
-            mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
+//FIXME            mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
         }
 
         setViewState();
@@ -176,7 +176,7 @@ public class MirrorActivity extends ActionBarActivity {
         } else if (openWeatherApiKeyRes != 0) {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         }
-//TODO Uncomment XKCD - Trying to find null bug
+
         if (mConfigSettings.showXKCD()) {
             XKCDModule.getXKCDForToday(mXKCDListener);
         } else {

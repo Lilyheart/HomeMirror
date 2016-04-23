@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
 
@@ -12,5 +13,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/default_mirror_mirror" />
+    <!--TODO: Remove button - only for testing-->
+    <Button
+        android:id="@+id/hello_button"
+        android:rotation="90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/launch"
+        android:textSize="@dimen/configuration_text_size" />
 
 </LinearLayout>
