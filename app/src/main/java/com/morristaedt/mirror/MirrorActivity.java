@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,22 +36,9 @@ public class MirrorActivity extends ActionBarActivity {
     private TextView mWeatherSummary;
     private TextView mBikeTodayText;
     private TextView mMoodText;
-    private ImageView mXKCDImage;
     private MoodModule mMoodModule;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
-
-    private XKCDModule.XKCDListener mXKCDListener = new XKCDModule.XKCDListener() {
-        @Override
-        public void onNewXKCDToday(String url) {
-            if (TextUtils.isEmpty(url)) {
-                mXKCDImage.setVisibility(View.GONE);
-            } else {
-//FIXME                Picasso.with(MirrorActivity.this).load(url).into(mXKCDImage);
-//FIXME                mXKCDImage.setVisibility(View.VISIBLE);
-            }
-        }
-    };
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
@@ -125,27 +113,27 @@ public class MirrorActivity extends ActionBarActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        //Gets the data to display
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
         mBikeTodayText = (TextView) findViewById(R.id.can_bike);
         mMoodText = (TextView) findViewById(R.id.mood_text);
-        mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
         mCalendarTitleText = (TextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (TextView) findViewById(R.id.calendar_details);
 
-        if (mConfigSettings.invertXKCD()) {
-            //Negative of XKCD image
-            float[] colorMatrixNegative = {
-                    -1.0f, 0, 0, 0, 255, //red
-                    0, -1.0f, 0, 0, 255, //green
-                    0, 0, -1.0f, 0, 255, //blue
-                    0, 0, 0, 1.0f, 0 //alpha
-            };
-            ColorFilter colorFilterNegative = new ColorMatrixColorFilter(colorMatrixNegative);
-//FIXME            mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
-        }
-
         setViewState();
+
+        ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
+        stub.setLayoutResource(R.layout.screen_hello);
+        View inflated = stub.inflate();
+
+        findViewById(R.id.hello_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MirrorActivity.this, MirrorXKCD.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -175,12 +163,6 @@ public class MirrorActivity extends ActionBarActivity {
             ForecastModule.getForecastIOHourlyForecast(getString(forecastApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         } else if (openWeatherApiKeyRes != 0) {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
-        }
-
-        if (mConfigSettings.showXKCD()) {
-            XKCDModule.getXKCDForToday(mXKCDListener);
-        } else {
-            mXKCDImage.setVisibility(View.GONE);
         }
 
         if (mConfigSettings.showNextCalendarEvent()) {
