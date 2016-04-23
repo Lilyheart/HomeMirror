@@ -44,7 +44,10 @@
         </activity>
         <activity
             android:name=".MirrorActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="standard" />
+        <activity
+            android:name=".MirrorXKCD"
+            android:parentActivityName=".MirrorActivity" />
 
         <receiver android:name=".receiver.AlarmReceiver" />
 

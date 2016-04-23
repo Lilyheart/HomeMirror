@@ -75,6 +75,7 @@ public class MirrorXKCD extends ActionBarActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
         ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
         stub.setLayoutResource(R.layout.screen_xkcd);
         View inflated = stub.inflate();
