@@ -5,9 +5,9 @@
     <dimen name="item_margin">20dp</dimen>
     <dimen name="mirror_item_spacing">40dp</dimen>
 
-    <dimen name="mirror_text_size">38sp</dimen>
-    <dimen name="mirror_clock_text_size">80sp</dimen>
-    <dimen name="mirror_birthday_text_size">48sp</dimen>
-    <dimen name="configuration_text_size">20sp</dimen>
-    <dimen name="configuration_description_size">14sp</dimen>
+    <dimen name="mirror_text_size">18sp</dimen>
+    <dimen name="mirror_clock_text_size">42sp</dimen>
+
+    <dimen name="configuration_text_size">25sp</dimen>
+    <dimen name="configuration_description_size">19sp</dimen>
 </resources>
