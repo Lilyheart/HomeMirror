@@ -6,6 +6,7 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import java.lang.ref.WeakReference;
 
 public class MirrorActivity extends ActionBarActivity {
 
+    @NonNull
     private ConfigurationSettings mConfigSettings;
 
     private TextView mDayText;
@@ -163,7 +165,7 @@ public class MirrorActivity extends ActionBarActivity {
 
     private void setViewState() {
 
-        mDayText.setText(DayModule.getDay());
+//TODO        mDayText.setText(DayModule.getDay());
         // Get the API key for whichever weather service API key is available
         // These should be declared as a string in xml
         int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
@@ -174,25 +176,25 @@ public class MirrorActivity extends ActionBarActivity {
         } else if (openWeatherApiKeyRes != 0) {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         }
-
-        if (mConfigSettings.showXKCD()) {
-            XKCDModule.getXKCDForToday(mXKCDListener);
-        } else {
-            mXKCDImage.setVisibility(View.GONE);
-        }
+//TODO Uncomment XKCD - Trying to find null bug
+//        if (mConfigSettings.showXKCD()) {
+//            XKCDModule.getXKCDForToday(mXKCDListener);
+//        } else {
+//            mXKCDImage.setVisibility(View.GONE);
+//        }
 
         if (mConfigSettings.showNextCalendarEvent()) {
             CalendarModule.getCalendarEvents(this, mCalendarListener);
         } else {
-            mCalendarTitleText.setVisibility(View.GONE);
-            mCalendarDetailsText.setVisibility(View.GONE);
+//TODO            mCalendarTitleText.setVisibility(View.GONE);
+//TODO            mCalendarDetailsText.setVisibility(View.GONE);
         }
 
         if (mConfigSettings.showMoodDetection()) {
             mMoodModule = new MoodModule(new WeakReference<Context>(this));
             mMoodModule.getCurrentMood(mMoodListener);
         } else {
-            mMoodText.setVisibility(View.GONE);
+//TODO            mMoodText.setVisibility(View.GONE);
         }
     }
 

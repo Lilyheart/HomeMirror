@@ -38,12 +38,6 @@
             android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http"
-                    android:host="github.com"
-                    android:pathPrefix="/lilyheart/HomeMirror" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -54,9 +48,9 @@
 
         <receiver android:name=".receiver.AlarmReceiver" />
 
-        <activity
-            android:name=".MonitorScreen"
-            android:label="@string/title_activity_monitor_screen" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8ebbe66b8cfe6315ace3cb76b8bca78ebcb72131" />
     </application>
 
 </manifest>
