@@ -27,16 +27,17 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+
+
+        <!--android:theme="@style/AppTheme">-->
 
         <activity
             android:name=".SetUpActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance"
-            android:windowSoftInputMode="stateHidden">
+            android:label="@string/app_name">
+            <!--TODO BELONGS ABOVE android:launchMode="singleInstance"-->
+            <!--android:windowSoftInputMode="stateHidden"-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -49,11 +50,25 @@
             android:name=".MirrorXKCD"
             android:parentActivityName=".MirrorActivity" />
 
-        <receiver android:name=".receiver.AlarmReceiver" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8ebbe66b8cfe6315ace3cb76b8bca78ebcb72131" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <receiver android:name=".receiver.AlarmReceiver" />
+
+        <receiver
+            android:name=".BroadCastReceiverFlic"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.flic.FLICLIB_EVENT" />
+            </intent-filter>
+        </receiver>
+
     </application>
+
 
 </manifest>

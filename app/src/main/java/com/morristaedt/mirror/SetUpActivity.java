@@ -1,6 +1,5 @@
 package com.morristaedt.mirror;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -9,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,7 +18,13 @@ import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 
-public class SetUpActivity extends Activity {
+import io.flic.lib.FlicAppNotInstalledException;
+import io.flic.lib.FlicBroadcastReceiverFlags;
+import io.flic.lib.FlicButton;
+import io.flic.lib.FlicManager;
+import io.flic.lib.FlicManagerInitializedCallback;
+
+public class SetUpActivity extends AppCompatActivity {
 
     private static final long HOUR_MILLIS = 60 * 60 * 1000;
     private static final int METERS_MIN = 500;
@@ -47,6 +53,9 @@ public class SetUpActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+        FlicConfig.setFlicCredentials();
+        grabButton();
+        Log.d("Flic Logged", "True");
 
         mConfigSettings = new ConfigurationSettings(this);
 
@@ -84,6 +93,39 @@ public class SetUpActivity extends Activity {
 
                 Intent intent = new Intent(SetUpActivity.this, MirrorActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    //View v
+    public void grabButton() {
+        Log.d("Flic Grab", "True");
+        try {
+            FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+                @Override
+                public void onInitialized(FlicManager manager) {
+                    manager.initiateGrabButton(SetUpActivity.this);
+                }
+            });
+        } catch (FlicAppNotInstalledException err) {
+            Toast.makeText(this, "Flic App is not installed", Toast.LENGTH_SHORT).show();
+        }
+        Log.d("Flic Grabbed", "True");
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        Log.d("OnActivity", "True");
+        FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+            @Override
+            public void onInitialized(FlicManager manager) {
+                FlicButton button = manager.completeGrabButton(requestCode, resultCode, data);
+                if (button != null) {
+                    button.registerListenForBroadcast(FlicBroadcastReceiverFlags.UP_OR_DOWN | FlicBroadcastReceiverFlags.REMOVED);
+                    Toast.makeText(SetUpActivity.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SetUpActivity.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
