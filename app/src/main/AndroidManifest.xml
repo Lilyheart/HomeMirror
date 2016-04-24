@@ -59,15 +59,6 @@
 
         <receiver android:name=".receiver.AlarmReceiver" />
 
-        <receiver
-            android:name=".BroadCastReceiverFlic"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="io.flic.FLICLIB_EVENT" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
 
