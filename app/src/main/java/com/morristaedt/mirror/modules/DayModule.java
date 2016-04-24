@@ -9,6 +9,7 @@ import java.util.Locale;
 
 /**
  * Created by HannahMitt on 8/23/15.
+ *
  */
 public class DayModule {
 

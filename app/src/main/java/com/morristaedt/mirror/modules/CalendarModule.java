@@ -13,9 +13,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by alex on 12/09/15.
+ *
  */
 public class CalendarModule {
     public interface CalendarListener {
@@ -43,11 +45,11 @@ public class CalendarModule {
                         CalendarContract.EventsEntity.EVENT_LOCATION};
 
                 Calendar now = Calendar.getInstance();
-                SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yy");
+                SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yy", Locale.US);
                 String dateString = startFormat.format(now.getTime());
                 long start = now.getTimeInMillis();
 
-                SimpleDateFormat endFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yy");
+                SimpleDateFormat endFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yy", Locale.US);
                 Calendar endOfDay = Calendar.getInstance();
                 Date endofDayDate;
                 try {

@@ -12,6 +12,7 @@ import com.morristaedt.mirror.MirrorActivity;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class AlarmReceiver extends BroadcastReceiver {
 

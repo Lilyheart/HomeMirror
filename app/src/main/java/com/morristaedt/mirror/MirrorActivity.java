@@ -9,72 +9,39 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
-import com.morristaedt.mirror.modules.BirthdayModule;
 import com.morristaedt.mirror.modules.CalendarModule;
-import com.morristaedt.mirror.modules.ChoresModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
-import com.morristaedt.mirror.modules.NewsModule;
 import com.morristaedt.mirror.modules.XKCDModule;
-import com.morristaedt.mirror.modules.YahooFinanceModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
-import com.morristaedt.mirror.requests.YahooStockResponse;
-import com.morristaedt.mirror.utils.WeekUtil;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
-public class MirrorActivity extends ActionBarActivity {
+public class MirrorActivity extends AppCompatActivity {
 
     @NonNull
     private ConfigurationSettings mConfigSettings;
 
-    private TextView mBirthdayText;
     private TextView mDayText;
     private TextView mWeatherSummary;
-    private TextView mHelloText;
     private TextView mBikeTodayText;
-    private TextView mStockText;
     private TextView mMoodText;
-    private View mWaterPlants;
-    private View mGroceryList;
-    private ImageView mXKCDImage;
     private MoodModule mMoodModule;
-    private TextView mNewsHeadline;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
 
-    private XKCDModule.XKCDListener mXKCDListener = new XKCDModule.XKCDListener() {
-        @Override
-        public void onNewXKCDToday(String url) {
-            if (TextUtils.isEmpty(url)) {
-                mXKCDImage.setVisibility(View.GONE);
-            } else {
-                Picasso.with(MirrorActivity.this).load(url).into(mXKCDImage);
-                mXKCDImage.setVisibility(View.VISIBLE);
-            }
-        }
-    };
-
-    private YahooFinanceModule.StockListener mStockListener = new YahooFinanceModule.StockListener() {
-        @Override
-        public void onNewStockPrice(YahooStockResponse.YahooQuoteResponse quoteResponse) {
-            if (quoteResponse == null) {
-                mStockText.setVisibility(View.GONE);
-            } else {
-                mStockText.setVisibility(View.VISIBLE);
-                mStockText.setText("$" + quoteResponse.symbol + " $" + quoteResponse.LastTradePriceOnly);
-            }
-        }
-    };
+    private ScreenRotation ScreenButton = new ScreenRotation();
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
@@ -92,19 +59,6 @@ public class MirrorActivity extends ActionBarActivity {
                 mBikeTodayText.setText(shouldBike ? R.string.bike_today : R.string.no_bike_today);
             } else {
                 mBikeTodayText.setVisibility(View.GONE);
-            }
-        }
-    };
-
-    private NewsModule.NewsListener mNewsListener = new NewsModule.NewsListener() {
-        @Override
-        public void onNewNews(String headline) {
-            if (TextUtils.isEmpty(headline)) {
-                mNewsHeadline.setVisibility(View.GONE);
-            } else {
-                mNewsHeadline.setVisibility(View.VISIBLE);
-                mNewsHeadline.setText(headline);
-                mNewsHeadline.setSelected(true);
             }
         }
     };
@@ -162,33 +116,27 @@ public class MirrorActivity extends ActionBarActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mBirthdayText = (TextView) findViewById(R.id.birthday_text);
+        //Gets the data to display
         mDayText = (TextView) findViewById(R.id.day_text);
         mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
-        mHelloText = (TextView) findViewById(R.id.hello_text);
-        mWaterPlants = findViewById(R.id.water_plants);
-        mGroceryList = findViewById(R.id.grocery_list);
         mBikeTodayText = (TextView) findViewById(R.id.can_bike);
-        mStockText = (TextView) findViewById(R.id.stock_text);
         mMoodText = (TextView) findViewById(R.id.mood_text);
-        mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
-        mNewsHeadline = (TextView) findViewById(R.id.news_headline);
         mCalendarTitleText = (TextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (TextView) findViewById(R.id.calendar_details);
 
-        if (mConfigSettings.invertXKCD()) {
-            //Negative of XKCD image
-            float[] colorMatrixNegative = {
-                    -1.0f, 0, 0, 0, 255, //red
-                    0, -1.0f, 0, 0, 255, //green
-                    0, 0, -1.0f, 0, 255, //blue
-                    0, 0, 0, 1.0f, 0 //alpha
-            };
-            ColorFilter colorFilterNegative = new ColorMatrixColorFilter(colorMatrixNegative);
-            mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
-        }
-
         setViewState();
+
+        ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
+        stub.setLayoutResource(R.layout.screen_hello);
+        View inflated = stub.inflate();
+
+        findViewById(R.id.hello_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MirrorActivity.this, MirrorXKCD.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -207,20 +155,8 @@ public class MirrorActivity extends ActionBarActivity {
     }
 
     private void setViewState() {
-        String birthday = BirthdayModule.getBirthday();
-        if (TextUtils.isEmpty(birthday)) {
-            mBirthdayText.setVisibility(View.GONE);
-        } else {
-            mBirthdayText.setVisibility(View.VISIBLE);
-            mBirthdayText.setText(getString(R.string.happy_birthday, birthday));
-        }
 
-        mDayText.setText(DayModule.getDay());
-//        mHelloText.setText(TimeModule.getTimeOfDayWelcome(getResources())); // not in current design
-
-        mWaterPlants.setVisibility(ChoresModule.waterPlantsToday() ? View.VISIBLE : View.GONE);
-        mGroceryList.setVisibility(ChoresModule.makeGroceryListToday() ? View.VISIBLE : View.GONE);
-
+//TODO        mDayText.setText(DayModule.getDay());
         // Get the API key for whichever weather service API key is available
         // These should be declared as a string in xml
         int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
@@ -232,36 +168,18 @@ public class MirrorActivity extends ActionBarActivity {
             ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
         }
 
-        if (mConfigSettings.showNewsHeadline()) {
-            NewsModule.getNewsHeadline(mNewsListener);
-        } else {
-            mNewsHeadline.setVisibility(View.GONE);
-        }
-
-        if (mConfigSettings.showXKCD()) {
-            XKCDModule.getXKCDForToday(mXKCDListener);
-        } else {
-            mXKCDImage.setVisibility(View.GONE);
-        }
-
         if (mConfigSettings.showNextCalendarEvent()) {
             CalendarModule.getCalendarEvents(this, mCalendarListener);
         } else {
-            mCalendarTitleText.setVisibility(View.GONE);
-            mCalendarDetailsText.setVisibility(View.GONE);
-        }
-
-        if (mConfigSettings.showStock() && (ConfigurationSettings.isDemoMode() || WeekUtil.isWeekdayAfterFive())) {
-            YahooFinanceModule.getStockForToday(mConfigSettings.getStockTickerSymbol(), mStockListener);
-        } else {
-            mStockText.setVisibility(View.GONE);
+//TODO            mCalendarTitleText.setVisibility(View.GONE);
+//TODO            mCalendarDetailsText.setVisibility(View.GONE);
         }
 
         if (mConfigSettings.showMoodDetection()) {
             mMoodModule = new MoodModule(new WeakReference<Context>(this));
             mMoodModule.getCurrentMood(mMoodListener);
         } else {
-            mMoodText.setVisibility(View.GONE);
+//TODO            mMoodText.setVisibility(View.GONE);
         }
     }
 

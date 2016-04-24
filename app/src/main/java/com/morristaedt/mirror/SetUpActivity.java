@@ -1,6 +1,5 @@
 package com.morristaedt.mirror;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -8,24 +7,36 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 
-public class SetUpActivity extends Activity {
+import java.util.List;
+
+import io.flic.lib.FlicAppNotInstalledException;
+import io.flic.lib.FlicBroadcastReceiverFlags;
+import io.flic.lib.FlicButton;
+import io.flic.lib.FlicButtonCallback;
+import io.flic.lib.FlicButtonCallbackFlags;
+import io.flic.lib.FlicManager;
+import io.flic.lib.FlicManagerInitializedCallback;
+
+public class SetUpActivity extends AppCompatActivity {
+
+    private static final String TAG = "SetUpActivity";
+    private FlicManager manager;
 
     private static final long HOUR_MILLIS = 60 * 60 * 1000;
     private static final int METERS_MIN = 500;
 
-    @NonNull
     private ConfigurationSettings mConfigSettings;
 
     private LocationManager mLocationManager;
@@ -40,18 +51,48 @@ public class SetUpActivity extends Activity {
     private CheckBox mBikingCheckbox;
     private CheckBox mMoodDetectionCheckbox;
     private CheckBox mShowNextCaledarEventCheckbox;
-    private CheckBox mShowNewsHeadlineCheckbox;
     private CheckBox mXKCDCheckbox;
     private CheckBox mXKCDInvertCheckbox;
     private View mLocationView;
     private EditText mLatitude;
     private EditText mLongitude;
-    private EditText mStockTickerSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+
+        //Flic Button
+        FlicConfig.setFlicCredentials();
+
+        FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+
+            @Override
+            public void onInitialized(FlicManager manager) {
+                Log.d(TAG, "Ready to use manager");
+
+                SetUpActivity.this.manager = manager;
+
+                // Restore buttons grabbed in a previous run of the activity
+                List<FlicButton> buttons = manager.getKnownButtons();
+                for (FlicButton button : buttons) {
+                    String status = null;
+                    switch (button.getConnectionStatus()) {
+                        case FlicButton.BUTTON_DISCONNECTED:
+                            status = "disconnected";
+                            break;
+                        case FlicButton.BUTTON_CONNECTION_STARTED:
+                            status = "connection started";
+                            break;
+                        case FlicButton.BUTTON_CONNECTION_COMPLETED:
+                            status = "connection completed";
+                            break;
+                    }
+                    Log.d(TAG, "Found an existing button: " + button + ", status: " + status);
+                    setButtonCallback(button);
+                }
+            }
+        });
 
         mConfigSettings = new ConfigurationSettings(this);
 
@@ -66,9 +107,6 @@ public class SetUpActivity extends Activity {
 
         mShowNextCaledarEventCheckbox = (CheckBox) findViewById(R.id.calendar_checkbox);
         mShowNextCaledarEventCheckbox.setChecked(mConfigSettings.showNextCalendarEvent());
-
-        mShowNewsHeadlineCheckbox = (CheckBox) findViewById(R.id.headline_checkbox);
-        mShowNewsHeadlineCheckbox.setChecked(mConfigSettings.showNewsHeadline());
 
         mXKCDCheckbox = (CheckBox) findViewById(R.id.xkcd_checkbox);
         mXKCDCheckbox.setChecked(mConfigSettings.showXKCD());
@@ -85,19 +123,77 @@ public class SetUpActivity extends Activity {
         mLocationView = findViewById(R.id.location_view);
         setUpLocationMonitoring();
 
-        mStockTickerSymbol = (EditText) findViewById(R.id.stock_name);
-        mStockTickerSymbol.setText(mConfigSettings.getStockTickerSymbol());
-
         findViewById(R.id.launch_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveFields();
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mStockTickerSymbol.getWindowToken(), 0);
-
                 Intent intent = new Intent(SetUpActivity.this, MirrorActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void setButtonCallback(FlicButton button) {
+        button.removeAllFlicButtonCallbacks();
+        button.addFlicButtonCallback(buttonCallback);
+        button.setFlicButtonCallbackFlags(FlicButtonCallbackFlags.UP_OR_DOWN);
+        button.setActiveMode(true);
+    }
+
+    private FlicButtonCallback buttonCallback = new FlicButtonCallback() {
+        @Override
+        public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
+            final String text = button + " was " + (isDown ? "pressed" : "released");
+            Log.d(TAG, text);
+
+            if (!isDown)
+                return;
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG,"Button Down");
+                }
+            });
+        }
+    };
+
+    public void grabButton(View v) {
+        if (manager != null) {
+            manager.initiateGrabButton(this);
+        }
+    }
+
+//    OLD GRABBUTTON
+//    public void grabButton(View v) {
+//        Log.d("Flic Grab", "True");
+//        try {
+//            FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+//                @Override
+//                public void onInitialized(FlicManager manager) {
+//                    manager.initiateGrabButton(SetUpActivity.this);
+//                }
+//            });
+//        } catch (FlicAppNotInstalledException err) {
+//            Toast.makeText(this, "Flic App is not installed", Toast.LENGTH_SHORT).show();
+//        }
+//        Log.d("Flic Grabbed", "True");
+//    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        Log.d("OnActivity", "True");
+        FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+            @Override
+            public void onInitialized(FlicManager manager) {
+                FlicButton button = manager.completeGrabButton(requestCode, resultCode, data);
+                if (button != null) {
+                    button.registerListenForBroadcast(FlicBroadcastReceiverFlags.UP_OR_DOWN | FlicBroadcastReceiverFlags.REMOVED);
+                    Toast.makeText(SetUpActivity.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SetUpActivity.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -136,19 +232,13 @@ public class SetUpActivity extends Activity {
                     }
 
                     @Override
-                    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                    }
+                    public void onStatusChanged(String provider, int status, Bundle extras) {}
 
                     @Override
-                    public void onProviderEnabled(String provider) {
-
-                    }
+                    public void onProviderEnabled(String provider) {}
 
                     @Override
-                    public void onProviderDisabled(String provider) {
-
-                    }
+                    public void onProviderDisabled(String provider) {}
                 };
                 mLocationManager.requestLocationUpdates(provider, HOUR_MILLIS, METERS_MIN, mLocationListener);
             } else {
@@ -164,7 +254,6 @@ public class SetUpActivity extends Activity {
         mConfigSettings.setShowBikingHint(mBikingCheckbox.isChecked());
         mConfigSettings.setShowMoodDetection(mMoodDetectionCheckbox.isChecked());
         mConfigSettings.setShowNextCalendarEvent(mShowNextCaledarEventCheckbox.isChecked());
-        mConfigSettings.setShowNewsHeadline(mShowNewsHeadlineCheckbox.isChecked());
         mConfigSettings.setXKCDPreference(mXKCDCheckbox.isChecked(), mXKCDInvertCheckbox.isChecked());
 
         if (mLocation == null) {
@@ -173,6 +262,5 @@ public class SetUpActivity extends Activity {
             mConfigSettings.setLatLon(String.valueOf(mLocation.getLatitude()), String.valueOf(mLocation.getLongitude()));
         }
 
-        mConfigSettings.setStockTickerSymbol(mStockTickerSymbol.getText().toString());
     }
 }

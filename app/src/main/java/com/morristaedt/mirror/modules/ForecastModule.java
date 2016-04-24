@@ -20,6 +20,7 @@ import retrofit.RetrofitError;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class ForecastModule {
 
@@ -31,10 +32,6 @@ public class ForecastModule {
 
     /**
      * @param apiKey   The api key for the forecast.io weather api
-     * @param units
-     * @param lat
-     * @param lon
-     * @param listener
      */
     public static void getForecastIOHourlyForecast(final String apiKey, final String units, final String lat, final String lon, final ForecastListener listener) {
         new AsyncTask<Void, Void, ForecastResponse>() {
@@ -100,10 +97,6 @@ public class ForecastModule {
 
     /**
      * @param apiKey   The api key for the openweather api
-     * @param units
-     * @param lat
-     * @param lon
-     * @param listener
      */
     public static void getOpenWeatherForecast(final String apiKey, final String units, final String lat, final String lon, final ForecastListener listener) {
         new AsyncTask<Void, Void, OpenWeatherResponse>() {

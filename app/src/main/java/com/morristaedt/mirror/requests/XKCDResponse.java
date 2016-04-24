@@ -2,6 +2,7 @@ package com.morristaedt.mirror.requests;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class XKCDResponse {
 

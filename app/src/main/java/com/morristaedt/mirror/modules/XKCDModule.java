@@ -17,6 +17,7 @@ import retrofit.RetrofitError;
 
 /**
  * Created by HannahMitt on 8/22/15.
+ *
  */
 public class XKCDModule {
 
@@ -27,7 +28,6 @@ public class XKCDModule {
     /**
      * Fetch the the latest xkcd comic, but only show it if its new today
      *
-     * @param listener
      */
     public static void getXKCDForToday(final XKCDListener listener) {
         new AsyncTask<Void, Void, XKCDResponse>() {
@@ -60,7 +60,8 @@ public class XKCDModule {
 
             private boolean isTodaysXKCD(@NonNull XKCDResponse xkcdResponse) {
                 Calendar today = Calendar.getInstance();
-                return xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR);
+                //TODO uncomment original return:: return xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR);
+                return true;
             }
         }.execute();
 
