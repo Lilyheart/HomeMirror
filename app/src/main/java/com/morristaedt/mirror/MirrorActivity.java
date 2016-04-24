@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewStub;
@@ -27,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
-public class MirrorActivity extends ActionBarActivity {
+public class MirrorActivity extends AppCompatActivity {
 
     @NonNull
     private ConfigurationSettings mConfigSettings;
@@ -39,6 +40,8 @@ public class MirrorActivity extends ActionBarActivity {
     private MoodModule mMoodModule;
     private TextView mCalendarTitleText;
     private TextView mCalendarDetailsText;
+
+    private ScreenRotation ScreenButton = new ScreenRotation();
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
