@@ -55,6 +55,7 @@ dependencies {
         transitive = true;
     }
     compile project(':fliclib')
+    compile 'org.jsoup:jsoup:1.9.1'
 }
 
 def signingFile = rootProject.file('signing.properties')
