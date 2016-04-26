@@ -7,15 +7,14 @@
     android:paddingTop="10dp">
 
     <include
+        android:id="@+id/include"
         layout="@layout/screen_standard"
         android:layout_width="175dp"
-        android:layout_height="fill_parent"
-        android:id="@+id/include" />
+        android:layout_height="fill_parent" />
 
     <ViewStub
         android:id="@+id/layout_stub"
-        android:inflatedId="@+id/screen_septa"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

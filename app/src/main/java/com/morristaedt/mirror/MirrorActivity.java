@@ -2,29 +2,22 @@ package com.morristaedt.mirror;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.MoodModule;
-import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
-import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 
@@ -125,9 +118,9 @@ public class MirrorActivity extends AppCompatActivity {
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
 
-        ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_hello);
-        View inflated = stub.inflate();
+        ViewStub stubHello = (ViewStub) findViewById(R.id.layout_stub);
+        stubHello.setLayoutResource(R.layout.screen_hello);
+        stubHello.inflate();
 
         findViewById(R.id.hello_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,9 +173,9 @@ public class MirrorActivity extends AppCompatActivity {
         if (mConfigSettings.showMoodDetection()) {
             mMoodModule = new MoodModule(new WeakReference<Context>(this));
             mMoodModule.getCurrentMood(mMoodListener);
-        } else {
+        } //else {
 //TODO            mMoodText.setVisibility(View.GONE);
-        }
+//        }
     }
 
     @Override

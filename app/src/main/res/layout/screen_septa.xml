@@ -15,8 +15,9 @@
         android:textSize="44sp"
         tools:text="Generic Septa Alert" />
 
+    <!--TODO: Remove button - only for testing-->
     <Button
-        android:id="@+id/hello_button"
+        android:id="@+id/septa_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotation="90"

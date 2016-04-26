@@ -1,6 +1,5 @@
 package com.morristaedt.mirror;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;
@@ -14,22 +13,15 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
-import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
-import com.morristaedt.mirror.modules.ForecastModule;
-import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 import com.squareup.picasso.Picasso;
 
-import java.lang.ref.WeakReference;
-
 /**
  * Created by Lilyheart on 4/23/2016.
- *
  */
 public class MirrorXKCD extends ActionBarActivity {
 
@@ -37,6 +29,7 @@ public class MirrorXKCD extends ActionBarActivity {
     private ConfigurationSettings mConfigSettings;
 
     private ImageView mXKCDImage;
+    private VerticalTextView mDayText;
 
     private XKCDModule.XKCDListener mXKCDListener = new XKCDModule.XKCDListener() {
         @Override
@@ -78,14 +71,16 @@ public class MirrorXKCD extends ActionBarActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
-        ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_xkcd);
-        View inflated = stub.inflate();
+        ViewStub stubXKCD = (ViewStub) findViewById(R.id.layout_stub);
+        stubXKCD.setLayoutResource(R.layout.screen_xkcd);
+        stubXKCD.inflate();
 
 //        TextView mainTextView = (TextView) findViewById(R.id.main_textview);
 //        mainTextView.setText("Button pressed!");
 
         mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
+        mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+
 
         if (mConfigSettings.invertXKCD()) {
             //Negative of XKCD image
@@ -117,6 +112,9 @@ public class MirrorXKCD extends ActionBarActivity {
     }
 
     private void setViewState() {
+
+        mDayText.setText(DayModule.getDay());
+
         if (mConfigSettings.showXKCD()) {
             XKCDModule.getXKCDForToday(mXKCDListener);
         } else {
@@ -124,11 +122,11 @@ public class MirrorXKCD extends ActionBarActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        AlarmReceiver.stopMirrorUpdates(this);
-        Intent intent = new Intent(this, SetUpActivity.class);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        AlarmReceiver.stopMirrorUpdates(this);
+//        Intent intent = new Intent(this, SetUpActivity.class);
+//        startActivity(intent);
+//    }
 }

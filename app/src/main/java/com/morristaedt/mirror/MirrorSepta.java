@@ -13,21 +13,21 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
-import com.morristaedt.mirror.modules.MoodModule;
+import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.SeptaModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Lee on 4/24/2016.
- *
  */
 public class MirrorSepta extends AppCompatActivity {
 
     @NonNull
+    private final String TAG = "MirrorSepta";
     private ConfigurationSettings mConfigSettings;
 
     private TextView mSeptaAlert;
+    private VerticalTextView mDayText;
 
     private SeptaModule.SeptaListener mSeptaListener = new SeptaModule.SeptaListener() {
         @Override
@@ -45,7 +45,7 @@ public class MirrorSepta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_septa);
+        setContentView(R.layout.activity_mirror);
         mConfigSettings = new ConfigurationSettings(this);
         AlarmReceiver.startMirrorUpdates(this);
 
@@ -69,21 +69,23 @@ public class MirrorSepta extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        ViewStub stubSepta = (ViewStub) findViewById(R.id.layout_stub);
+        stubSepta.setLayoutResource(R.layout.screen_septa);
+        stubSepta.inflate();
+
         mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_alert);
+        mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+
 
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
-        ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_septa);
-        View inflated = stub.inflate();
 
-//        TODO Fix code for next button
-//        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
-//                startActivity(intent);
-//            }
-//        });
+        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setViewState();
     }
@@ -95,14 +97,17 @@ public class MirrorSepta extends AppCompatActivity {
     }
 
     private void setViewState() {
+
+        mDayText.setText(DayModule.getDay());
+
         SeptaModule.getSingleAlert(mSeptaListener);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        AlarmReceiver.stopMirrorUpdates(this);
-        Intent intent = new Intent(this, SetUpActivity.class);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed() {
+////        super.onBackPressed();
+////        AlarmReceiver.stopMirrorUpdates(this);
+////        Intent intent = new Intent(this, SetUpActivity.class);
+////        startActivity(intent);
+//    }
 }

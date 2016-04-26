@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <com.morristaedt.mirror.VerticalTextView
         style="@style/MirrorText"
-        android:textSize="44sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/default_mirror_mirror" />
+        android:text="@string/default_mirror_mirror"
+        android:textSize="44sp" />
+
     <!--TODO: Remove button - only for testing-->
     <Button
         android:id="@+id/hello_button"
-        android:rotation="90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:rotation="90"
         android:text="@string/launch"
         android:textSize="@dimen/configuration_text_size" />
 
