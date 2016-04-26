@@ -19,7 +19,8 @@
         android:ellipsize="marquee"
         android:focusable="true"
         android:lines="1"
-        android:text="11:00-12:00 ~ 10 Downing Street" />
+        tools:text="11:00-12:00 ~ 10 Downing Street"
+        android:visibility="gone"/>
 
     <com.morristaedt.mirror.VerticalTextView android:id="@+id/calendar_title"
         style="@style/MirrorText"
@@ -27,13 +28,15 @@
         android:layout_height="match_parent"
         android:ellipsize="marquee"
         android:lines="1"
-        android:text="Very VERY VERY VERY VERY VERY VERY VERY important meeting" />
+        tools:text="Very VERY VERY VERY VERY VERY VERY VERY important meeting"
+        android:visibility="gone"/>
 
     <com.morristaedt.mirror.VerticalTextView android:id="@+id/weather_summary"
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Partly Cloudy" />
+        tools:text="Partly Cloudy"
+        android:visibility="gone"/>
 
     <include layout="@layout/clock"
         android:layout_width="wrap_content"
@@ -44,7 +47,7 @@
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:text="Sunday the 22nd"/>
+        tools:text="Sunday the 22nd"/>
 
     <!-- android:visibility="gone" -->
 

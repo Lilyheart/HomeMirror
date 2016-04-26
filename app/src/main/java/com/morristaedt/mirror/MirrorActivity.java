@@ -33,19 +33,19 @@ public class MirrorActivity extends AppCompatActivity {
     @NonNull
     private ConfigurationSettings mConfigSettings;
 
-    private TextView mDayText;
-    private TextView mWeatherSummary;
-    private TextView mBikeTodayText;
-    private TextView mMoodText;
+    private VerticalTextView mDayText;
+    private VerticalTextView mWeatherSummary;
+    private VerticalTextView mBikeTodayText;
+    private VerticalTextView mMoodText;
     private MoodModule mMoodModule;
-    private TextView mCalendarTitleText;
-    private TextView mCalendarDetailsText;
+    private VerticalTextView mCalendarTitleText;
+    private VerticalTextView mCalendarDetailsText;
 
     private ScreenRotation ScreenButton = new ScreenRotation();
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
-        public void onWeatherToday(String weatherToday) {
+        public void onWeatherToday(String weatherToday) { //TODO isn't showing.  Any idea why?
             if (!TextUtils.isEmpty(weatherToday)) {
                 mWeatherSummary.setVisibility(View.VISIBLE);
                 mWeatherSummary.setText(weatherToday);
@@ -117,17 +117,16 @@ public class MirrorActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         //Gets the data to display
-        mDayText = (TextView) findViewById(R.id.day_text);
-        mWeatherSummary = (TextView) findViewById(R.id.weather_summary);
-        mBikeTodayText = (TextView) findViewById(R.id.can_bike);
-        mMoodText = (TextView) findViewById(R.id.mood_text);
-        mCalendarTitleText = (TextView) findViewById(R.id.calendar_title);
-        mCalendarDetailsText = (TextView) findViewById(R.id.calendar_details);
+        mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+        mWeatherSummary = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.weather_summary);
+        //mBikeTodayText = (VerticalTextView) findViewById(R.id.can_bike);
+        //mMoodText = (VerticalTextView) findViewById(R.id.mood_text);
+        mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
+        mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
-        setViewState();
 
         ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_septa);
+        stub.setLayoutResource(R.layout.screen_hello);
         View inflated = stub.inflate();
 
         findViewById(R.id.hello_button).setOnClickListener(new View.OnClickListener() {
@@ -137,6 +136,9 @@ public class MirrorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        setViewState();
+
     }
 
     @Override
@@ -156,7 +158,7 @@ public class MirrorActivity extends AppCompatActivity {
 
     private void setViewState() {
 
-//TODO        mDayText.setText(DayModule.getDay());
+        mDayText.setText(DayModule.getDay());
         // Get the API key for whichever weather service API key is available
         // These should be declared as a string in xml
         int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
@@ -171,8 +173,8 @@ public class MirrorActivity extends AppCompatActivity {
         if (mConfigSettings.showNextCalendarEvent()) {
             CalendarModule.getCalendarEvents(this, mCalendarListener);
         } else {
-//TODO            mCalendarTitleText.setVisibility(View.GONE);
-//TODO            mCalendarDetailsText.setVisibility(View.GONE);
+            mCalendarTitleText.setVisibility(View.GONE);
+            mCalendarDetailsText.setVisibility(View.GONE);
         }
 
         if (mConfigSettings.showMoodDetection()) {
