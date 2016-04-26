@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="44sp"
-        tools:text="For current updates on all routes go to System Status. Trolley: Routes 10, 11, 13, 34, 36: The subway-surface tunnel is closed for repairs this weekend will reopen on Monday morning April 25th. During this time, all routes are on diversion to 40th Market Streets. More details." />
+        tools:text="Generic Septa Alert" />
 
     <Button
         android:id="@+id/hello_button"

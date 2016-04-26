@@ -127,7 +127,7 @@ public class MirrorActivity extends AppCompatActivity {
         setViewState();
 
         ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_hello);
+        stub.setLayoutResource(R.layout.screen_septa);
         View inflated = stub.inflate();
 
         findViewById(R.id.hello_button).setOnClickListener(new View.OnClickListener() {

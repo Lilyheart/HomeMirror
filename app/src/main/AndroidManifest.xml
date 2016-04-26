@@ -49,6 +49,9 @@
         <activity
             android:name=".MirrorXKCD"
             android:parentActivityName=".MirrorActivity" />
+        <activity
+            android:name=".MirrorSepta"
+            android:parentActivityName=".MirrorActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

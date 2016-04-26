@@ -27,15 +27,25 @@ public class MirrorSepta extends AppCompatActivity {
     @NonNull
     private ConfigurationSettings mConfigSettings;
 
-    private ScreenRotation ScreenButton = new ScreenRotation();
+    private TextView mSeptaAlert;
 
-    private SeptaModule septa = new SeptaModule();
-    private TextView mSeptaSingleAlert;
+    private SeptaModule.SeptaListener mSeptaListener = new SeptaModule.SeptaListener() {
+        @Override
+        public void onNewAlert(String alert) {
+            if (TextUtils.isEmpty(alert)) {
+                mSeptaAlert.setVisibility(View.GONE);
+            } else {
+                mSeptaAlert.setVisibility(View.VISIBLE);
+                mSeptaAlert.setText(alert);
+                mSeptaAlert.setSelected(true);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mirror);
+        setContentView(R.layout.screen_septa);
         mConfigSettings = new ConfigurationSettings(this);
         AlarmReceiver.startMirrorUpdates(this);
 
@@ -55,31 +65,27 @@ public class MirrorSepta extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.hide();
 
-            mSeptaSingleAlert = (TextView) findViewById(R.id.septa_alert);
-
-            findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
-                    startActivity(intent);
-                }
-            });
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_alert);
+
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
         ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
-        stub.setLayoutResource(R.layout.screen_xkcd);
+        stub.setLayoutResource(R.layout.screen_septa);
         View inflated = stub.inflate();
 
-//        TextView mainTextView = (TextView) findViewById(R.id.main_textview);
-//        mainTextView.setText("Button pressed!");
-
+//        TODO Fix code for next button
+//        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+//                startActivity(intent);
+//            }
+//        });
 
         setViewState();
-
-
     }
 
     @Override
@@ -89,7 +95,7 @@ public class MirrorSepta extends AppCompatActivity {
     }
 
     private void setViewState() {
-        septa.getSingleAlert();
+        SeptaModule.getSingleAlert(mSeptaListener);
     }
 
     @Override
