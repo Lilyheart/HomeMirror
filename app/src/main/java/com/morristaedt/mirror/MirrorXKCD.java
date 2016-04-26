@@ -73,14 +73,6 @@ public class MirrorXKCD extends ActionBarActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.hide();
 
-
-            findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
-                    startActivity(intent);
-                }
-            });
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -106,6 +98,14 @@ public class MirrorXKCD extends ActionBarActivity {
             ColorFilter colorFilterNegative = new ColorMatrixColorFilter(colorMatrixNegative);
             mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
         }
+
+        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+                startActivity(intent);
+            }
+        });
 
         setViewState();
     }
