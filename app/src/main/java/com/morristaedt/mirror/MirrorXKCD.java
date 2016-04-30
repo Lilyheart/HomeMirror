@@ -140,13 +140,13 @@ public class MirrorXKCD extends ActionBarActivity {
             mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
         }
 
-        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+//                startActivity(intent);
+//            }
+//        });
 
         setViewState();
     }
@@ -188,16 +188,18 @@ public class MirrorXKCD extends ActionBarActivity {
         public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
+            Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+            startActivity(intent);
 
             if (!isDown)
                 return;
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "Button Down");
-                }
-            });
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.d(TAG, "Button Down");
+//                }
+//            });
         }
     };
 

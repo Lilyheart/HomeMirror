@@ -124,13 +124,13 @@ public class MirrorSepta extends AppCompatActivity {
 
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
 
-        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         setViewState();
     }
@@ -168,16 +168,18 @@ public class MirrorSepta extends AppCompatActivity {
         public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
+            Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
+            startActivity(intent);
 
             if (!isDown)
                 return;
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "Button Down");
-                }
-            });
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.d(TAG, "Button Down");
+//                }
+//            });
         }
     };
 
