@@ -243,11 +243,11 @@ public class MirrorActivity extends AppCompatActivity {
         public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
-            Intent intent = new Intent(MirrorActivity.this, MirrorXKCD.class);
-            startActivity(intent);
 
             if (!isDown)
                 return;
+                Intent intent = new Intent(MirrorActivity.this, MirrorXKCD.class);
+                startActivity(intent);
 
 //            runOnUiThread(new Runnable() {
 //                @Override

@@ -168,11 +168,11 @@ public class MirrorSepta extends AppCompatActivity {
         public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
-            Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
-            startActivity(intent);
 
             if (!isDown)
                 return;
+                Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
+                startActivity(intent);
 
 //            runOnUiThread(new Runnable() {
 //                @Override

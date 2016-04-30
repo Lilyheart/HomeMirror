@@ -188,11 +188,11 @@ public class MirrorXKCD extends ActionBarActivity {
         public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
-            Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
-            startActivity(intent);
 
             if (!isDown)
                 return;
+                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+                startActivity(intent);
 
 //            runOnUiThread(new Runnable() {
 //                @Override
