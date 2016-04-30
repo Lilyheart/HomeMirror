@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
+import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
@@ -44,6 +45,8 @@ public class MirrorXKCD extends ActionBarActivity {
 
     private ImageView mXKCDImage;
     private VerticalTextView mDayText;
+    private VerticalTextView mCalendarTitleText;
+    private VerticalTextView mCalendarDetailsText;
 
     private XKCDModule.XKCDListener mXKCDListener = new XKCDModule.XKCDListener() {
         @Override
@@ -54,6 +57,20 @@ public class MirrorXKCD extends ActionBarActivity {
                 Picasso.with(MirrorXKCD.this).load(url).into(mXKCDImage);
                 mXKCDImage.setVisibility(View.VISIBLE);
             }
+        }
+    };
+
+    private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
+        @Override
+        public void onCalendarUpdate(String title, String details) {
+            mCalendarTitleText.setVisibility(title != null ? View.VISIBLE : View.GONE);
+            mCalendarTitleText.setText(title);
+            mCalendarDetailsText.setVisibility(details != null ? View.VISIBLE : View.GONE);
+            mCalendarDetailsText.setText(details);
+
+            //Make marquee effect work for long text
+            mCalendarTitleText.setSelected(true);
+            mCalendarDetailsText.setSelected(true);
         }
     };
 
@@ -126,6 +143,8 @@ public class MirrorXKCD extends ActionBarActivity {
 
         mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+        mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
+        mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
 
         if (mConfigSettings.invertXKCD()) {
@@ -160,6 +179,13 @@ public class MirrorXKCD extends ActionBarActivity {
     private void setViewState() {
 
         mDayText.setText(DayModule.getDay());
+
+        if (mConfigSettings.showNextCalendarEvent()) {
+            CalendarModule.getCalendarEvents(this, mCalendarListener);
+        } else {
+            mCalendarTitleText.setVisibility(View.GONE);
+            mCalendarDetailsText.setVisibility(View.GONE);
+        }
 
         if (mConfigSettings.showXKCD()) {
             XKCDModule.getXKCDForToday(mXKCDListener);

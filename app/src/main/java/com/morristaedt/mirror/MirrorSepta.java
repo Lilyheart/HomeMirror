@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
+import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.SeptaModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
@@ -41,6 +42,8 @@ public class MirrorSepta extends AppCompatActivity {
 
     private TextView mSeptaAlert;
     private VerticalTextView mDayText;
+    private VerticalTextView mCalendarTitleText;
+    private VerticalTextView mCalendarDetailsText;
 
     private SeptaModule.SeptaListener mSeptaListener = new SeptaModule.SeptaListener() {
         @Override
@@ -52,6 +55,20 @@ public class MirrorSepta extends AppCompatActivity {
                 mSeptaAlert.setText(alert);
                 mSeptaAlert.setSelected(true);
             }
+        }
+    };
+
+    private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
+        @Override
+        public void onCalendarUpdate(String title, String details) {
+            mCalendarTitleText.setVisibility(title != null ? View.VISIBLE : View.GONE);
+            mCalendarTitleText.setText(title);
+            mCalendarDetailsText.setVisibility(details != null ? View.VISIBLE : View.GONE);
+            mCalendarDetailsText.setText(details);
+
+            //Make marquee effect work for long text
+            mCalendarTitleText.setSelected(true);
+            mCalendarDetailsText.setSelected(true);
         }
     };
 
@@ -120,6 +137,8 @@ public class MirrorSepta extends AppCompatActivity {
 
         mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_alert);
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+        mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
+        mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
 
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
@@ -144,6 +163,13 @@ public class MirrorSepta extends AppCompatActivity {
     private void setViewState() {
 
         mDayText.setText(DayModule.getDay());
+
+        if (mConfigSettings.showNextCalendarEvent()) {
+            CalendarModule.getCalendarEvents(this, mCalendarListener);
+        } else {
+            mCalendarTitleText.setVisibility(View.GONE);
+            mCalendarDetailsText.setVisibility(View.GONE);
+        }
 
         SeptaModule.getSingleAlert(mSeptaListener);
     }
