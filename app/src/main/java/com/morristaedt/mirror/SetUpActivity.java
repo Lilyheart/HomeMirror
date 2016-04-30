@@ -165,22 +165,6 @@ public class SetUpActivity extends AppCompatActivity {
         }
     }
 
-//    OLD GRABBUTTON
-//    public void grabButton(View v) {
-//        Log.d("Flic Grab", "True");
-//        try {
-//            FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
-//                @Override
-//                public void onInitialized(FlicManager manager) {
-//                    manager.initiateGrabButton(SetUpActivity.this);
-//                }
-//            });
-//        } catch (FlicAppNotInstalledException err) {
-//            Toast.makeText(this, "Flic App is not installed", Toast.LENGTH_SHORT).show();
-//        }
-//        Log.d("Flic Grabbed", "True");
-//    }
-
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         Log.d("OnActivity", "True");

@@ -9,10 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.DayModule;
@@ -20,10 +22,22 @@ import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
+import io.flic.lib.FlicBroadcastReceiverFlags;
+import io.flic.lib.FlicButton;
+import io.flic.lib.FlicButtonCallback;
+import io.flic.lib.FlicButtonCallbackFlags;
+import io.flic.lib.FlicManager;
+import io.flic.lib.FlicManagerInitializedCallback;
+
 /**
  * Created by Lilyheart on 4/23/2016.
  */
 public class MirrorXKCD extends ActionBarActivity {
+
+    private static final String TAG = "MirrorXKCD";
+    private FlicManager manager;
 
     @NonNull
     private ConfigurationSettings mConfigSettings;
@@ -67,6 +81,38 @@ public class MirrorXKCD extends ActionBarActivity {
             actionBar.hide();
 
         }
+
+        //Flic Button
+        FlicConfig.setFlicCredentials();
+
+        FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+
+            @Override
+            public void onInitialized(FlicManager manager) {
+                Log.d(TAG, "Ready to use manager");
+
+                MirrorXKCD.this.manager = manager;
+
+                // Restore buttons grabbed in a previous run of the activity
+                List<FlicButton> buttons = manager.getKnownButtons();
+                for (FlicButton button : buttons) {
+                    String status = null;
+                    switch (button.getConnectionStatus()) {
+                        case FlicButton.BUTTON_DISCONNECTED:
+                            status = "disconnected";
+                            break;
+                        case FlicButton.BUTTON_CONNECTION_STARTED:
+                            status = "connection started";
+                            break;
+                        case FlicButton.BUTTON_CONNECTION_COMPLETED:
+                            status = "connection completed";
+                            break;
+                    }
+                    Log.d(TAG, "Found an existing button: " + button + ", status: " + status);
+                    setButtonCallback(button);
+                }
+            }
+        });
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -129,4 +175,52 @@ public class MirrorXKCD extends ActionBarActivity {
 //        Intent intent = new Intent(this, SetUpActivity.class);
 //        startActivity(intent);
 //    }
+
+    private void setButtonCallback(FlicButton button) {
+        button.removeAllFlicButtonCallbacks();
+        button.addFlicButtonCallback(buttonCallback);
+        button.setFlicButtonCallbackFlags(FlicButtonCallbackFlags.UP_OR_DOWN);
+        button.setActiveMode(true);
+    }
+
+    private FlicButtonCallback buttonCallback = new FlicButtonCallback() {
+        @Override
+        public void onButtonUpOrDown(FlicButton button, boolean wasQueued, int timeDiff, boolean isUp, boolean isDown) {
+            final String text = button + " was " + (isDown ? "pressed" : "released");
+            Log.d(TAG, text);
+
+            if (!isDown)
+                return;
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "Button Down");
+                }
+            });
+        }
+    };
+
+    public void grabButton(View v) {
+        if (manager != null) {
+            manager.initiateGrabButton(this);
+        }
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        Log.d("OnActivity", "True");
+        FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
+            @Override
+            public void onInitialized(FlicManager manager) {
+                FlicButton button = manager.completeGrabButton(requestCode, resultCode, data);
+                if (button != null) {
+                    button.registerListenForBroadcast(FlicBroadcastReceiverFlags.UP_OR_DOWN | FlicBroadcastReceiverFlags.REMOVED);
+                    Toast.makeText(MirrorXKCD.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MirrorXKCD.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
