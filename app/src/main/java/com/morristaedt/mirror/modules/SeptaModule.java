@@ -40,6 +40,7 @@ import retrofit.RetrofitError;
 public class SeptaModule {
 
     private final String TAG = "SeptaModule";
+    private static String textAlert;
     private String routeID;                     //TODO Assigned in settings
     private String nextFiveArrivals;            // Next five arrivals
 
@@ -60,7 +61,11 @@ public class SeptaModule {
             protected String doInBackground(Void... params) {
                 try {
                     Document doc = Jsoup.connect("http://www.septa.org/realtime/alert.html").get();
-                    return doc.text();
+                    textAlert = doc.text();
+                    String removeText = "For current updates on all routes go to System Status.";
+
+                    textAlert = textAlert.replace(removeText, "");
+                    return textAlert;
                 } catch (Exception err) {
                     Log.d(TAG, "Single Alert exception thrown: " + err);
                     return null;
