@@ -38,5 +38,6 @@
     <string name="biking_hint">Show biking weather hint</string>
     <string name="how_to_stop">To get back to Set Up and stop mirror updates, swipe up from bottom of launched mirror, and press Back.</string>
     <string name="title_activity_monitor_screen">Monitor Screen</string>
+    <string name="withings_current_weight">Your current weight:</string>
 
 </resources>

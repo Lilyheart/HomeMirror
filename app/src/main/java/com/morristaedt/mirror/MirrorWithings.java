@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
-import com.morristaedt.mirror.modules.SeptaModule;
+import com.morristaedt.mirror.modules.WithingsModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 
 import java.util.List;
@@ -30,30 +30,30 @@ import io.flic.lib.FlicManager;
 import io.flic.lib.FlicManagerInitializedCallback;
 
 /**
- * Created by Lee on 4/24/2016.
+ * Created by Lilyheart on 4/30/2016.
  */
-public class MirrorSepta extends AppCompatActivity {
+public class MirrorWithings extends AppCompatActivity {
 
-    private static final String TAG = "MirrorSepta";
+    private static final String TAG = "MirrorWithings";
     private FlicManager manager;
 
     @NonNull
     private ConfigurationSettings mConfigSettings;
 
-    private TextView mSeptaAlert;
+    private TextView mWithingsAlert;
     private VerticalTextView mDayText;
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
-    private SeptaModule.SeptaListener mSeptaListener = new SeptaModule.SeptaListener() {
+    private WithingsModule.WithingsListener mWithingsListener = new WithingsModule.WithingsListener() {
         @Override
         public void onNewAlert(String alert) {
             if (TextUtils.isEmpty(alert)) {
-                mSeptaAlert.setVisibility(View.GONE);
+                mWithingsAlert.setVisibility(View.GONE);
             } else {
-                mSeptaAlert.setVisibility(View.VISIBLE);
-                mSeptaAlert.setText(alert);
-                mSeptaAlert.setSelected(true);
+                mWithingsAlert.setVisibility(View.VISIBLE);
+                mWithingsAlert.setText(alert);
+                mWithingsAlert.setSelected(true);
             }
         }
     };
@@ -106,7 +106,7 @@ public class MirrorSepta extends AppCompatActivity {
             public void onInitialized(FlicManager manager) {
                 Log.d(TAG, "Ready to use manager");
 
-                MirrorSepta.this.manager = manager;
+                MirrorWithings.this.manager = manager;
 
                 // Restore buttons grabbed in a previous run of the activity
                 List<FlicButton> buttons = manager.getKnownButtons();
@@ -131,11 +131,11 @@ public class MirrorSepta extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        ViewStub stubSepta = (ViewStub) findViewById(R.id.layout_stub);
-        stubSepta.setLayoutResource(R.layout.screen_septa);
-        stubSepta.inflate();
+        ViewStub stubWithings = (ViewStub) findViewById(R.id.layout_stub);
+        stubWithings.setLayoutResource(R.layout.screen_withings);
+        stubWithings.inflate();
 
-        mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_alert);
+        mWithingsAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.withings_weight);
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
         mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
@@ -143,10 +143,10 @@ public class MirrorSepta extends AppCompatActivity {
 
         //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
 
-//        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
+//        findViewById(R.id.withings_button).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorSepta.this, MirrorActivity.class);
+//                Intent intent = new Intent(MirrorWithings.this, MirrorActivity.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -171,7 +171,7 @@ public class MirrorSepta extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        SeptaModule.getSingleAlert(mSeptaListener);
+        WithingsModule.getSingleAlert(mWithingsListener);
     }
 
 //    @Override
@@ -197,8 +197,8 @@ public class MirrorSepta extends AppCompatActivity {
 
             if (!isDown)
                 return;
-                Intent intent = new Intent(MirrorSepta.this, MirrorWithings.class);
-                startActivity(intent);
+            Intent intent = new Intent(MirrorWithings.this, MirrorActivity.class);
+            startActivity(intent);
 
 //            runOnUiThread(new Runnable() {
 //                @Override
@@ -224,9 +224,9 @@ public class MirrorSepta extends AppCompatActivity {
                 FlicButton button = manager.completeGrabButton(requestCode, resultCode, data);
                 if (button != null) {
                     button.registerListenForBroadcast(FlicBroadcastReceiverFlags.UP_OR_DOWN | FlicBroadcastReceiverFlags.REMOVED);
-                    Toast.makeText(MirrorSepta.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MirrorWithings.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MirrorSepta.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MirrorWithings.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
                 }
             }
         });

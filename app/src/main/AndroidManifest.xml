@@ -56,6 +56,10 @@
             android:name=".MirrorSepta"
             android:launchMode="standard"
             android:parentActivityName="com.morristaedt.mirror.MirrorActivity" />
+        <activity
+            android:name=".MirrorWithings"
+            android:launchMode="standard"
+            android:parentActivityName="com.morristaedt.mirror.MirrorActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
