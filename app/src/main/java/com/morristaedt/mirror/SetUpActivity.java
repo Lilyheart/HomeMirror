@@ -6,22 +6,30 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import io.flic.lib.FlicAppNotInstalledException;
+import au.com.bytecode.opencsv.CSVReader;
 import io.flic.lib.FlicBroadcastReceiverFlags;
 import io.flic.lib.FlicButton;
 import io.flic.lib.FlicButtonCallback;
@@ -54,6 +62,7 @@ public class SetUpActivity extends AppCompatActivity {
     private View mLocationView;
     private EditText mLatitude;
     private EditText mLongitude;
+    List<String> stations = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +124,11 @@ public class SetUpActivity extends AppCompatActivity {
         mLocationView = findViewById(R.id.location_view);
         setUpLocationMonitoring();
 
+        setSeptaStations();
+        Spinner dropdown = (Spinner)findViewById(R.id.railStations);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stations);
+        dropdown.setAdapter(adapter);
+
         findViewById(R.id.launch_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +138,38 @@ public class SetUpActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setSeptaStations() {
+
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected void onPostExecute(String s) {
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                try {
+                    String[] nextLine;
+                    HashMap<String, String> hmap = new HashMap<String, String>();
+
+                    URL stationURL = new URL("http://www3.septa.org/hackathon/Arrivals/station_id_name.csv");
+                    CSVReader reader = new CSVReader(new BufferedReader(new InputStreamReader(stationURL.openStream())));
+                    //clear first line
+                    nextLine = reader.readNext();
+
+                    while ((nextLine = reader.readNext()) != null) {
+                        hmap.put(nextLine[0], nextLine[1]);
+                        stations.add(nextLine[1]);
+                    }
+
+                    return null;
+                } catch (Exception err) {
+                    Log.d(TAG, "setSeptaStation: " + err);
+                    return null;
+                }
+            }
+        }.execute();
     }
 
     private void setButtonCallback(FlicButton button) {

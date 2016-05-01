@@ -4,29 +4,36 @@
     <string name="default_mirror_mirror">Mirror, mirror \non the wall. \nWho is the fairest \nof them all.</string>
 
     <!-- Time module -->
-    <string name="good_morning">Good morning, %s</string>
-    <string name="good_afternoon">Good afternoon, %s</string>
-    <string name="good_evening">Good evening, %s</string>
-    <string name="late">You\'re up late, %s</string>
-    <string name="bedtime">Good evening, %s\n\nIt\'s Your\'s bedtime.</string>
+    <!--<string name="good_morning">Good morning, %s</string>-->
+    <!--<string name="good_afternoon">Good afternoon, %s</string>-->
+    <!--<string name="good_evening">Good evening, %s</string>-->
+    <!--<string name="late">You\'re up late, %s</string>-->
+    <!--<string name="bedtime">Good evening, %s\n\nIt\'s Your\'s bedtime.</string>-->
 
     <!-- Set up -->
-    <string name="location">Location</string>
-    <string name="location_error">Couldn\'t detect a recent location</string>
+    <string name="set_up">Set Up</string>
+    <string name="grab_flic">Connect Flic Button</string>
     <string name="temperature">Temperature</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="set_up">Set Up</string>
+    <string name="show_calendar_event">Show next calendar event</string>
+    <string name="invert_colors">Invert comic colors</string>
+    <string name="location">Location</string>
+    <string name="location_error">Couldn\'t detect a recent location</string>
+    <string name="found_location">Found location</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
-    <string name="launch">Launch</string>
-    <string name="show_xkcd">Show new xkcd</string>
-    <string name="invert_colors">Invert comic colors</string>
-    <string name="show_calendar_event">Show next calendar event</string>
-    <string name="found_location">Found location</string>
-    <string name="biking_hint">Show biking weather hint</string>
+    <string name="launch">Launch (or press Flic button)</string>
     <string name="how_to_stop">To get back to Set Up and stop mirror updates, swipe up from bottom of launched mirror, and press Back.</string>
-    <string name="title_activity_monitor_screen">Monitor Screen</string>
+
+    <string name="show_xkcd">Show new xkcd</string>
+    <string name="biking_hint">Show biking weather hint</string>
+    
+    <string name="septa_title">Septa Settings</string>
+    <string name="septa_station">Station</string>
+    <!--<string name="title_activity_monitor_screen">Monitor Screen</string>-->
+
+
     <string name="withings_current_weight">Your current weight:</string>
 
 </resources>
