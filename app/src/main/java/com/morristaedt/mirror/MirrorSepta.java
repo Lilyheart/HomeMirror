@@ -195,10 +195,11 @@ public class MirrorSepta extends AppCompatActivity {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
 
-            if (!isDown)
-                return;
+            if (!isDown) {
                 Intent intent = new Intent(MirrorSepta.this, MirrorWithings.class);
                 startActivity(intent);
+                return;
+            }
 
 //            runOnUiThread(new Runnable() {
 //                @Override

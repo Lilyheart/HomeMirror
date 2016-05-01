@@ -244,10 +244,11 @@ public class MirrorActivity extends AppCompatActivity {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
 
-            if (!isDown)
-                return;
+            if (!isDown) {
                 Intent intent = new Intent(MirrorActivity.this, MirrorXKCD.class);
                 startActivity(intent);
+                return;
+            }
 
 //            runOnUiThread(new Runnable() {
 //                @Override

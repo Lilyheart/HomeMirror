@@ -195,10 +195,11 @@ public class MirrorWithings extends AppCompatActivity {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
 
-            if (!isDown)
+            if (!isDown) {
+                Intent intent = new Intent(MirrorWithings.this, MirrorActivity.class);
+                startActivity(intent);
                 return;
-            Intent intent = new Intent(MirrorWithings.this, MirrorActivity.class);
-            startActivity(intent);
+            }
 
 //            runOnUiThread(new Runnable() {
 //                @Override

@@ -215,10 +215,11 @@ public class MirrorXKCD extends ActionBarActivity {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
 
-            if (!isDown)
-                return;
+            if (!isDown) {
                 Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
                 startActivity(intent);
+                return;
+            }
 
 //            runOnUiThread(new Runnable() {
 //                @Override

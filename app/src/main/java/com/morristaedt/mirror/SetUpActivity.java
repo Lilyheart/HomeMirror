@@ -147,8 +147,14 @@ public class SetUpActivity extends AppCompatActivity {
             final String text = button + " was " + (isDown ? "pressed" : "released");
             Log.d(TAG, text);
 
-            if (!isDown)
+            if (!isDown) {
+                saveFields();
+
+                Intent intent = new Intent(SetUpActivity.this, MirrorActivity.class);
+                startActivity(intent);
+
                 return;
+            }
 
             runOnUiThread(new Runnable() {
                 @Override
