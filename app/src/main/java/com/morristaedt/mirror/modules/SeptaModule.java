@@ -39,17 +39,20 @@ import retrofit.RetrofitError;
  */
 public class SeptaModule {
 
-    private final String TAG = "SeptaModule";
-    private static String textAlert;
+    private static String textAlert;            //Alert information from Septa
     private String routeID;                     //TODO Assigned in settings
     private String nextFiveArrivals;            // Next five arrivals
 
+    //Updates when new alert received
     public interface SeptaListener {
         void onNewAlert(String SeptaAlert);
     }
 
-    public static void getSingleAlert(final SeptaListener septaListener) {
-        final String TAG = "SeptaAsyncModule";
+    //Returns travel alert information from septa
+    public static void getTravelAlert(final SeptaListener septaListener) {
+        final String TAG = "SeptaAsyncModule"; //Use to log error message
+
+        //Start UI thread for background operations
         new AsyncTask<Void, Void, String>() {
             @Override
             protected void onPostExecute(String s) {
@@ -60,11 +63,12 @@ public class SeptaModule {
             @Override
             protected String doInBackground(Void... params) {
                 try {
+                    //Uses Jsoup to connect to septa and pulls text off webpage
                     Document doc = Jsoup.connect("http://www.septa.org/realtime/alert.html").get();
+                    //Coverts the document to string
                     textAlert = doc.text();
-                    String removeText = "For current updates on all routes go to System Status.";
-
-                    textAlert = textAlert.replace(removeText, "");
+                    //Removes generic text from text
+                    textAlert = textAlert.replace("For current updates on all routes go to System Status.", "");
                     return textAlert;
                 } catch (Exception err) {
                     Log.d(TAG, "Single Alert exception thrown: " + err);
