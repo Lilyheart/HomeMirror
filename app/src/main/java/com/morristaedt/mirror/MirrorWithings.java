@@ -98,7 +98,7 @@ public class MirrorWithings extends AppCompatActivity {
         }
 
         //Flic Button
-        FlicConfig.setFlicCredentials();
+        FlicManager.setAppCredentials(getString(R.string.flic_appID), getString(R.string.flic_appSecret), getString(R.string.flic_appName));
 
         FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
 
