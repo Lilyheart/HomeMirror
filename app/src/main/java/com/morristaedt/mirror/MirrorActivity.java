@@ -41,7 +41,6 @@ public class MirrorActivity extends AppCompatActivity {
 
     private VerticalTextView mDayText;
     private VerticalTextView mWeatherSummary;
-    private VerticalTextView mBikeTodayText;
     private VerticalTextView mMoodText;
     private MoodModule mMoodModule;
     private VerticalTextView mCalendarTitleText;
@@ -51,20 +50,10 @@ public class MirrorActivity extends AppCompatActivity {
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
-        public void onWeatherToday(String weatherToday) { //TODO isn't showing.  Any idea why?
+        public void onWeatherToday(String weatherToday) {
             if (!TextUtils.isEmpty(weatherToday)) {
                 mWeatherSummary.setVisibility(View.VISIBLE);
                 mWeatherSummary.setText(weatherToday);
-            }
-        }
-
-        @Override
-        public void onShouldBike(boolean showToday, boolean shouldBike) {
-            if (mConfigSettings.showBikingHint()) {
-                mBikeTodayText.setVisibility(showToday ? View.VISIBLE : View.GONE);
-                mBikeTodayText.setText(shouldBike ? R.string.bike_today : R.string.no_bike_today);
-            } else {
-                mBikeTodayText.setVisibility(View.GONE);
             }
         }
     };
@@ -157,7 +146,6 @@ public class MirrorActivity extends AppCompatActivity {
         //Gets the data to display
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
         mWeatherSummary = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.weather_summary);
-        //mBikeTodayText = (VerticalTextView) findViewById(R.id.can_bike);
         //mMoodText = (VerticalTextView) findViewById(R.id.mood_text);
         mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
@@ -197,8 +185,7 @@ public class MirrorActivity extends AppCompatActivity {
     private void setViewState() {
 
         mDayText.setText(DayModule.getDay());
-        // Get the API key for whichever weather service API key is available
-        // These should be declared as a string in xml
+
         int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
         int openWeatherApiKeyRes = getResources().getIdentifier("open_weather_api_key", "string", getPackageName());
 

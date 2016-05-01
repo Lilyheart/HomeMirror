@@ -12,17 +12,17 @@
 
         <TextView
             style="@style/MirrorText"
-            android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/set_up" />
+            android:text="@string/set_up"
+            android:textSize="32sp" />
 
         <Button
-            android:text="Grab flic button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:onClick="grabButton"
-            android:layout_gravity="center_horizontal" />
+            android:text="Grab flic button" />
 
         <TextView
             style="@style/ConfigurationItemText"
@@ -57,20 +57,13 @@
         </RadioGroup>
 
         <CheckBox
-            android:id="@+id/biking_checkbox"
-            style="@style/ConfigurationItemText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/biking_hint" />
-
-        <CheckBox
             android:id="@+id/mood_detection_checkbox"
             style="@style/ConfigurationItemText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="@string/mood_detection_option" />
+            android:text="@string/mood_detection_option"
+            android:visibility="gone" />
 
         <TextView
             style="@style/ConfigurationDescriptionText"

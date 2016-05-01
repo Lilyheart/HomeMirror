@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:gravity="end"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="end"
+    android:orientation="horizontal">
 
     <!-- Due to rotation of text, entries are backwards! -->
     <!--         The bottom entry is on the top          -->
 
-    <!--TODO: switch all android:text back to tools:text -->
-
-    <com.morristaedt.mirror.VerticalTextView android:id="@+id/calendar_details"
+    <com.morristaedt.mirror.VerticalTextView
+        android:id="@+id/calendar_details"
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:ellipsize="marquee"
         android:focusable="true"
         android:lines="1"
+        android:visibility="gone"
         tools:text="11:00-12:00 ~ 10 Downing Street"
-        android:visibility="gone"/>
+        tools:visibility="visible" />
 
-    <com.morristaedt.mirror.VerticalTextView android:id="@+id/calendar_title"
+    <com.morristaedt.mirror.VerticalTextView
+        android:id="@+id/calendar_title"
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:ellipsize="marquee"
         android:lines="1"
+        android:visibility="gone"
         tools:text="Very VERY VERY VERY VERY VERY VERY VERY important meeting"
-        android:visibility="gone"/>
+        tools:visibility="visible" />
 
-    <com.morristaedt.mirror.VerticalTextView android:id="@+id/weather_summary"
+    <com.morristaedt.mirror.VerticalTextView
+        android:id="@+id/weather_summary"
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:text="Partly Cloudy"
-        android:visibility="gone"/>
+        tools:visibility="visible" />
 
-    <include layout="@layout/clock"
+    <include
+        layout="@layout/clock"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:gravity="end"/>
+        android:gravity="end" />
 
-    <com.morristaedt.mirror.VerticalTextView android:id="@+id/day_text"
+    <com.morristaedt.mirror.VerticalTextView
+        android:id="@+id/day_text"
         style="@style/MirrorText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        tools:text="Sunday the 22nd"/>
+        tools:text="Sunday the 22nd"
+        tools:visibility="visible" />
 
     <!-- android:visibility="gone" -->
 

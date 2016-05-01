@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
+import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 import com.squareup.picasso.Picasso;
@@ -45,6 +46,7 @@ public class MirrorXKCD extends ActionBarActivity {
 
     private ImageView mXKCDImage;
     private VerticalTextView mDayText;
+    private VerticalTextView mWeatherSummary;
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
@@ -74,7 +76,16 @@ public class MirrorXKCD extends ActionBarActivity {
         }
     };
 
-    @Override
+    private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
+        @Override
+        public void onWeatherToday(String weatherToday) {
+            if (!TextUtils.isEmpty(weatherToday)) {
+                mWeatherSummary.setVisibility(View.VISIBLE);
+                mWeatherSummary.setText(weatherToday);
+            }
+        }
+    };
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mirror);
@@ -143,6 +154,7 @@ public class MirrorXKCD extends ActionBarActivity {
 
         mXKCDImage = (ImageView) findViewById(R.id.xkcd_image);
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
+        mWeatherSummary = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.weather_summary);
         mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
@@ -179,6 +191,15 @@ public class MirrorXKCD extends ActionBarActivity {
     private void setViewState() {
 
         mDayText.setText(DayModule.getDay());
+
+        int forecastApiKeyRes = getResources().getIdentifier("dark_sky_api_key", "string", getPackageName());
+        int openWeatherApiKeyRes = getResources().getIdentifier("open_weather_api_key", "string", getPackageName());
+
+        if (forecastApiKeyRes != 0) {
+            ForecastModule.getForecastIOHourlyForecast(getString(forecastApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
+        } else if (openWeatherApiKeyRes != 0) {
+            ForecastModule.getOpenWeatherForecast(getString(openWeatherApiKeyRes), mConfigSettings.getForecastUnits(), mConfigSettings.getLatitude(), mConfigSettings.getLongitude(), mForecastListener);
+        }
 
         if (mConfigSettings.showNextCalendarEvent()) {
             CalendarModule.getCalendarEvents(this, mCalendarListener);
