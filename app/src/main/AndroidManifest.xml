@@ -47,19 +47,23 @@
         <activity
             android:name=".MirrorActivity"
             android:launchMode="standard"
-            android:parentActivityName="com.morristaedt.mirror.SetUpActivity" />
+            android:parentActivityName="com.morristaedt.mirror.SetUpActivity"
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MirrorXKCD"
             android:launchMode="standard"
-            android:parentActivityName="com.morristaedt.mirror.MirrorActivity" />
+            android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MirrorSepta"
             android:launchMode="standard"
-            android:parentActivityName="com.morristaedt.mirror.MirrorActivity" />
+            android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MirrorWithings"
             android:launchMode="standard"
-            android:parentActivityName="com.morristaedt.mirror.MirrorActivity" />
+            android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
+            android:screenOrientation="sensorLandscape" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
