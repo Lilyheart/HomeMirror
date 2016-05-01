@@ -18,7 +18,6 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
-import com.morristaedt.mirror.modules.MoodModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 
 import java.lang.ref.WeakReference;
@@ -41,8 +40,6 @@ public class MirrorActivity extends AppCompatActivity {
 
     private VerticalTextView mDayText;
     private VerticalTextView mWeatherSummary;
-    private VerticalTextView mMoodText;
-    private MoodModule mMoodModule;
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
@@ -55,19 +52,6 @@ public class MirrorActivity extends AppCompatActivity {
                 mWeatherSummary.setVisibility(View.VISIBLE);
                 mWeatherSummary.setText(weatherToday);
             }
-        }
-    };
-
-    private MoodModule.MoodListener mMoodListener = new MoodModule.MoodListener() {
-        @Override
-        public void onShouldGivePositiveAffirmation(final String affirmation) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mMoodText.setVisibility(affirmation == null ? View.GONE : View.VISIBLE);
-                    mMoodText.setText(affirmation);
-                }
-            });
         }
     };
 
@@ -146,7 +130,6 @@ public class MirrorActivity extends AppCompatActivity {
         //Gets the data to display
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
         mWeatherSummary = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.weather_summary);
-        //mMoodText = (VerticalTextView) findViewById(R.id.mood_text);
         mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
@@ -171,9 +154,6 @@ public class MirrorActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        if (mMoodModule != null) {
-            mMoodModule.release();
-        }
     }
 
     @Override
@@ -202,12 +182,6 @@ public class MirrorActivity extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        if (mConfigSettings.showMoodDetection()) {
-            mMoodModule = new MoodModule(new WeakReference<Context>(this));
-            mMoodModule.getCurrentMood(mMoodListener);
-        } //else {
-//TODO            mMoodText.setVisibility(View.GONE);
-//        }
     }
 
     @Override

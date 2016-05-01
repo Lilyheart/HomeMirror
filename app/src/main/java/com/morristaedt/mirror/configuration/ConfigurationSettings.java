@@ -21,8 +21,6 @@ public class ConfigurationSettings {
     private static final String PREFS_MIRROR = "MirrorPrefs";
 
     private static final String FORECAST_UNITS = "forecast_units";
-    private static final String BIKING_HINT = "biking_hint";
-    private static final String USE_MOOD_DETECTION = "mood_detection";
     private static final String SHOW_CALENDAR = "show_calendar";
     private static final String SHOW_XKCD = "xkcd";
     private static final String INVERT_XKCD = "invert_xkcd";
@@ -34,8 +32,6 @@ public class ConfigurationSettings {
 
     private String mForecastUnits;
 
-    private boolean mShowBikingHint;
-    private boolean mShowMoodDetection;
     private boolean mShowNextCalendarEvent;
     private boolean mShowXKCD;
     private boolean mInvertXKCD;
@@ -50,8 +46,6 @@ public class ConfigurationSettings {
 
     private void readPrefs() {
         mForecastUnits = mSharedPrefs.getString(FORECAST_UNITS, ForecastRequest.UNITS_US);
-        mShowBikingHint = mSharedPrefs.getBoolean(BIKING_HINT, false);
-        mShowMoodDetection = mSharedPrefs.getBoolean(USE_MOOD_DETECTION, false);
         mShowNextCalendarEvent = mSharedPrefs.getBoolean(SHOW_CALENDAR, false);
         mShowXKCD = mSharedPrefs.getBoolean(SHOW_XKCD, false);
         mInvertXKCD = mSharedPrefs.getBoolean(INVERT_XKCD, false);
@@ -64,20 +58,6 @@ public class ConfigurationSettings {
     public void setIsCelsius(boolean isCelsius) {
         SharedPreferences.Editor editor = mSharedPrefs.edit();
         editor.putString(FORECAST_UNITS, isCelsius ? ForecastRequest.UNITS_SI : ForecastRequest.UNITS_US);
-        editor.apply();
-    }
-
-    public void setShowBikingHint(boolean show) {
-        mShowBikingHint = show;
-        SharedPreferences.Editor editor = mSharedPrefs.edit();
-        editor.putBoolean(BIKING_HINT, show);
-        editor.apply();
-    }
-
-    public void setShowMoodDetection(boolean show) {
-        mShowMoodDetection = show;
-        SharedPreferences.Editor editor = mSharedPrefs.edit();
-        editor.putBoolean(USE_MOOD_DETECTION, show);
         editor.apply();
     }
 
@@ -113,14 +93,6 @@ public class ConfigurationSettings {
 
     public String getForecastUnits() {
         return mForecastUnits;
-    }
-
-    public boolean showBikingHint() {
-        return mShowBikingHint;
-    }
-
-    public boolean showMoodDetection() {
-        return mShowMoodDetection;
     }
 
     public boolean showNextCalendarEvent() {

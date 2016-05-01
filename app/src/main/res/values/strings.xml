@@ -10,11 +10,6 @@
     <string name="late">You\'re up late, %s</string>
     <string name="bedtime">Good evening, %s\n\nIt\'s Your\'s bedtime.</string>
 
-    <!-- Mood module -->
-    <string name="it_gets_better">Cheer up, bud</string>
-    <string name="looking_good">Looking flyyy</string>
-    <string name="something_special">Yay! Hi sunshine.</string>
-
     <!-- Set up -->
     <string name="location">Location</string>
     <string name="location_error">Couldn\'t detect a recent location</string>
@@ -25,12 +20,10 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="launch">Launch</string>
-    <string name="mood_detection_option">Show mood detection</string>
     <string name="show_xkcd">Show new xkcd</string>
     <string name="invert_colors">Invert comic colors</string>
     <string name="show_calendar_event">Show next calendar event</string>
     <string name="found_location">Found location</string>
-    <string name="mood_explanation">Uses the front facing camera to read your expression</string>
     <string name="biking_hint">Show biking weather hint</string>
     <string name="how_to_stop">To get back to Set Up and stop mirror updates, swipe up from bottom of launched mirror, and press Back.</string>
     <string name="title_activity_monitor_screen">Monitor Screen</string>

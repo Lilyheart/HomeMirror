@@ -57,21 +57,6 @@
         </RadioGroup>
 
         <CheckBox
-            android:id="@+id/mood_detection_checkbox"
-            style="@style/ConfigurationItemText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/mood_detection_option"
-            android:visibility="gone" />
-
-        <TextView
-            style="@style/ConfigurationDescriptionText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mood_explanation" />
-
-        <CheckBox
             android:id="@+id/calendar_checkbox"
             style="@style/ConfigurationItemText"
             android:layout_width="wrap_content"

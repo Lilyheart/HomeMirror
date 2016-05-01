@@ -48,7 +48,6 @@ public class SetUpActivity extends AppCompatActivity {
     private Location mLocation;
 
     private RadioGroup mTemperatureChoice;
-    private CheckBox mMoodDetectionCheckbox;
     private CheckBox mShowNextCaledarEventCheckbox;
     private CheckBox mXKCDCheckbox;
     private CheckBox mXKCDInvertCheckbox;
@@ -97,9 +96,6 @@ public class SetUpActivity extends AppCompatActivity {
 
         mTemperatureChoice = (RadioGroup) findViewById(R.id.temperature_group);
         mTemperatureChoice.check(mConfigSettings.getIsCelsius() ? R.id.celsius : R.id.farenheit);
-
-        mMoodDetectionCheckbox = (CheckBox) findViewById(R.id.mood_detection_checkbox);
-        mMoodDetectionCheckbox.setChecked(mConfigSettings.showMoodDetection());
 
         mShowNextCaledarEventCheckbox = (CheckBox) findViewById(R.id.calendar_checkbox);
         mShowNextCaledarEventCheckbox.setChecked(mConfigSettings.showNextCalendarEvent());
@@ -237,7 +233,6 @@ public class SetUpActivity extends AppCompatActivity {
 
     private void saveFields() {
         mConfigSettings.setIsCelsius(mTemperatureChoice.getCheckedRadioButtonId() == R.id.celsius);
-        mConfigSettings.setShowMoodDetection(mMoodDetectionCheckbox.isChecked());
         mConfigSettings.setShowNextCalendarEvent(mShowNextCaledarEventCheckbox.isChecked());
         mConfigSettings.setXKCDPreference(mXKCDCheckbox.isChecked(), mXKCDInvertCheckbox.isChecked());
 
