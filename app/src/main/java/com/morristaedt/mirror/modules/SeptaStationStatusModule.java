@@ -4,8 +4,20 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Lee on 4/24/2016.
@@ -20,7 +32,7 @@ public class SeptaStationStatusModule {
     }
 
     //Returns station status information from septa
-    public static void getStationStatus(final SeptaListener septaListener) {
+    public static void getStationStatus(final String StationID, final SeptaListener septaListener) {
         final String TAG = "SeptaAsyncModule"; //Use to log error message
 
         //Start UI thread for background operations
@@ -34,16 +46,41 @@ public class SeptaStationStatusModule {
             @Override
             protected String doInBackground(Void... params) {
                 try {
-                    //Uses Jsoup to connect to septa and pulls text off webpage
-                    Document doc = Jsoup.connect("http://www.septa.org/realtime/alert.html").get();
-                    //Coverts the document to string
-                    nextArrivals = doc.text();
-                    //Removes generic text from text
-                    nextArrivals = nextArrivals.replace("For current updates on all routes go to System Status.", "");
-                    nextArrivals = nextArrivals.replace(
-                            "This section will contain information on unanticipated service interruptions.",
-                            "No current travel alerts at this time!");
-                    return "Station \n" + nextArrivals;
+
+                    String sURL = "http://www3.septa.org/hackathon/Arrivals/" + StationID + "/1/";    // Connect to the URL
+                    URL url = new URL(sURL);
+
+                    //starts and opens a connection request
+                    HttpURLConnection request = (HttpURLConnection)url.openConnection();
+                    request.connect();
+
+                    JsonParser jp = new JsonParser(); //from gson
+                    JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+                    JsonObject rootObj = root.getAsJsonObject();
+
+                    //Convert Array to JsonReader Object to determine exact name of first key
+                    JsonReader jreader = new JsonReader(new StringReader(rootObj.toString()));
+                    jreader.beginObject(); //Consumes the next token from the JSON stream and asserts that it is the beginning of a new object.
+                    String septaTrainHeader = jreader.nextName();
+
+
+                    //JsonObject trainNext = rootObj.get(septaTrainHeader).getAsJsonObject();
+                    JsonArray trainDetail = rootObj.getAsJsonArray(septaTrainHeader);
+                    JsonObject northbound = trainDetail.get(0).getAsJsonObject().getAsJsonArray("Northbound").get(0).getAsJsonObject();
+                    JsonObject southbound = trainDetail.get(1).getAsJsonObject().getAsJsonArray("Southbound").get(0).getAsJsonObject();
+
+                    septaTrainHeader = septaTrainHeader.replace(": ", "\n as of ");
+
+                    return septaTrainHeader + "\n\n" +
+                            "Next Northbound\n" +
+                            "Leaving: " + northbound.get("depart_time").getAsString() + "\n" +
+                            "Delay: " + northbound.get("status").getAsString() + "\n" +
+                            "Destination: " + northbound.get("destination").getAsString() + "\n\n" +
+                            "Next Southbound\n" +
+                            "Leaving: " + southbound.get("depart_time").getAsString() + "\n" +
+                            "Delay: " + southbound.get("status").getAsString() + "\n" +
+                            "Destination: " + southbound.get("destination").getAsString();
+
                 } catch (Exception err) {
                     Log.d(TAG, "Station status exception thrown: " + err);
                     return null;

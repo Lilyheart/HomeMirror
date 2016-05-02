@@ -192,7 +192,7 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        SeptaStationStatusModule.getStationStatus(mSeptaListener);
+        SeptaStationStatusModule.getStationStatus(mConfigSettings.getStation(), mSeptaListener); //TODO Code station ID
     }
 
 //    @Override
