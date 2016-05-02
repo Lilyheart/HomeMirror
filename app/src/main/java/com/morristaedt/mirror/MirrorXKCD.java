@@ -174,7 +174,7 @@ public class MirrorXKCD extends ActionBarActivity {
 //        findViewById(R.id.xkcd_button).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+//                Intent intent = new Intent(MirrorXKCD.this, MirrorSeptaTravelAlert.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -237,7 +237,7 @@ public class MirrorXKCD extends ActionBarActivity {
             Log.d(TAG, text);
 
             if (!isDown) {
-                Intent intent = new Intent(MirrorXKCD.this, MirrorSepta.class);
+                Intent intent = new Intent(MirrorXKCD.this, MirrorSeptaTravelAlert.class);
                 startActivity(intent);
                 return;
             }

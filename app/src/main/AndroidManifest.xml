@@ -55,9 +55,9 @@
             android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name=".MirrorSepta"
+            android:name=".MirrorSeptaTravelAlert"
             android:launchMode="standard"
-            android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
+            android:parentActivityName="com.morristaedt.mirror.MirrorSeptaTravelAlert"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MirrorWithings"

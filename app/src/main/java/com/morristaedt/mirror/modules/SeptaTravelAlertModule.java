@@ -37,7 +37,7 @@ import retrofit.RetrofitError;
 /**
  * Created by Lee on 4/24/2016.
  */
-public class SeptaModule {
+public class SeptaTravelAlertModule {
 
     private static String textAlert;            //Alert information from Septa
     private String routeID;                     //TODO Assigned in settings
