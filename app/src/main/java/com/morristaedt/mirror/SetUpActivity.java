@@ -62,6 +62,7 @@ public class SetUpActivity extends AppCompatActivity {
     private View mLocationView;
     private EditText mLatitude;
     private EditText mLongitude;
+    private EditText mStation;
     List<String> stations = new ArrayList<String>();
 
     @Override
@@ -121,13 +122,16 @@ public class SetUpActivity extends AppCompatActivity {
         mLatitude.setText(String.valueOf(mConfigSettings.getLatitude()));
         mLongitude.setText(String.valueOf(mConfigSettings.getLongitude()));
 
+        mStation = (EditText) findViewById(R.id.septa_station);
+        mStation.setText(String.valueOf(mConfigSettings.getStation()));
+
         mLocationView = findViewById(R.id.location_view);
         setUpLocationMonitoring();
 
-        setSeptaStations();
-        Spinner dropdown = (Spinner)findViewById(R.id.railStations);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stations);
-        dropdown.setAdapter(adapter);
+        //setSeptaStations();
+        //Spinner dropdown = (Spinner)findViewById(R.id.railStations);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stations);
+        //dropdown.setAdapter(adapter);
 
         findViewById(R.id.launch_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,6 +285,7 @@ public class SetUpActivity extends AppCompatActivity {
         mConfigSettings.setIsCelsius(mTemperatureChoice.getCheckedRadioButtonId() == R.id.celsius);
         mConfigSettings.setShowNextCalendarEvent(mShowNextCaledarEventCheckbox.isChecked());
         mConfigSettings.setXKCDPreference(mXKCDCheckbox.isChecked(), mXKCDInvertCheckbox.isChecked());
+        mConfigSettings.setStation(mStation.getText().toString());
 
         if (mLocation == null) {
             mConfigSettings.setLatLon(mLatitude.getText().toString(), mLongitude.getText().toString());

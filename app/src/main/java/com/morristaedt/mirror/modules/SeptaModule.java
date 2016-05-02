@@ -69,6 +69,9 @@ public class SeptaModule {
                     textAlert = doc.text();
                     //Removes generic text from text
                     textAlert = textAlert.replace("For current updates on all routes go to System Status.", "");
+                    textAlert = textAlert.replace(
+                            "This section will contain information on unanticipated service interruptions.",
+                            "No current travel alerts at this time!");
                     return textAlert;
                 } catch (Exception err) {
                     Log.d(TAG, "Single Alert exception thrown: " + err);

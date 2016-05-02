@@ -26,6 +26,7 @@ public class ConfigurationSettings {
     private static final String INVERT_XKCD = "invert_xkcd";
     private static final String LAT = "lat";
     private static final String LON = "lon";
+    private static final String STATION = "station";
 
     @NonNull
     private SharedPreferences mSharedPrefs;
@@ -38,6 +39,8 @@ public class ConfigurationSettings {
 
     private String mLatitude;
     private String mLongitude;
+
+    private String mStation;
 
     public ConfigurationSettings(Context context) {
         mSharedPrefs = context.getSharedPreferences(PREFS_MIRROR, Context.MODE_PRIVATE);
@@ -52,6 +55,8 @@ public class ConfigurationSettings {
 
         mLatitude = mSharedPrefs.getString(LAT, "");
         mLongitude = mSharedPrefs.getString(LON, "");
+
+        mStation = mSharedPrefs.getString(STATION, "");
 
     }
 
@@ -87,6 +92,14 @@ public class ConfigurationSettings {
         editor.apply();
     }
 
+    public void setStation(String station) {
+        mStation = station.trim();
+
+        SharedPreferences.Editor editor = mSharedPrefs.edit();
+        editor.putString(STATION, mStation);
+        editor.apply();
+    }
+
     public boolean getIsCelsius() {
         return ForecastRequest.UNITS_SI.equals(mForecastUnits);
     }
@@ -113,6 +126,10 @@ public class ConfigurationSettings {
 
     public String getLongitude() {
         return mLongitude;
+    }
+
+    public String getStation() {
+        return mStation;
     }
 
     public static boolean isDebugBuild() {
