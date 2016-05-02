@@ -192,7 +192,7 @@ public class MirrorSepta extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        SeptaModule.getSingleAlert(mSeptaListener);
+        SeptaModule.getTravelAlert(mSeptaListener);
     }
 
 //    @Override
