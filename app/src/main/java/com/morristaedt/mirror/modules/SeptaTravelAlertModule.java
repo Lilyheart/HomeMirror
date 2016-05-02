@@ -40,8 +40,6 @@ import retrofit.RetrofitError;
 public class SeptaTravelAlertModule {
 
     private static String textAlert;            //Alert information from Septa
-    private String routeID;                     //TODO Assigned in settings
-    private String nextFiveArrivals;            // Next five arrivals
 
     //Updates when new alert received
     public interface SeptaListener {

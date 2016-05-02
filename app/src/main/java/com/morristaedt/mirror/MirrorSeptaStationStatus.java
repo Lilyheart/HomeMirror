@@ -18,7 +18,7 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.modules.CalendarModule;
 import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
-import com.morristaedt.mirror.modules.SeptaTravelAlertModule;
+import com.morristaedt.mirror.modules.SeptaStationStatusModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 
 import java.util.List;
@@ -33,9 +33,9 @@ import io.flic.lib.FlicManagerInitializedCallback;
 /**
  * Created by Lee on 4/24/2016.
  */
-public class MirrorSeptaTravelAlert extends AppCompatActivity {
+public class MirrorSeptaStationStatus extends AppCompatActivity {
 
-    private static final String TAG = "MirrorSeptaTravelAlert";
+    private static final String TAG = "MirrorSStationS";
     private FlicManager manager;
 
     @NonNull
@@ -47,9 +47,9 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
-    private SeptaTravelAlertModule.SeptaListener mSeptaListener = new SeptaTravelAlertModule.SeptaListener() {
+    private SeptaStationStatusModule.SeptaListener mSeptaListener = new SeptaStationStatusModule.SeptaListener() {
         @Override
-        public void onNewAlert(String alert) {
+        public void onNewUpdate(String alert) {
             if (TextUtils.isEmpty(alert)) {
                 mSeptaAlert.setVisibility(View.GONE);
             } else {
@@ -117,7 +117,7 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
             public void onInitialized(FlicManager manager) {
                 Log.d(TAG, "Ready to use manager");
 
-                MirrorSeptaTravelAlert.this.manager = manager;
+                MirrorSeptaStationStatus.this.manager = manager;
 
                 // Restore buttons grabbed in a previous run of the activity
                 List<FlicButton> buttons = manager.getKnownButtons();
@@ -143,10 +143,10 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         ViewStub stubSepta = (ViewStub) findViewById(R.id.layout_stub);
-        stubSepta.setLayoutResource(R.layout.screen_septa_travel_alert);
+        stubSepta.setLayoutResource(R.layout.screen_septa_station_status);
         stubSepta.inflate();
 
-        mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_alert);
+        mSeptaAlert = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.septa_station_status);
         mDayText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.day_text);
         mWeatherSummary = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.weather_summary);
         mCalendarTitleText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_title);
@@ -158,7 +158,7 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
 //        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorSeptaTravelAlert.this, MirrorActivity.class);
+//                Intent intent = new Intent(MirrorSeptaStationStatus.this, MirrorActivity.class);
 //                startActivity(intent);
 //            }
 //        });
@@ -192,7 +192,7 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        SeptaTravelAlertModule.getTravelAlert(mSeptaListener);
+        SeptaStationStatusModule.getStationStatus(mSeptaListener);
     }
 
 //    @Override
@@ -217,7 +217,7 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
             Log.d(TAG, text);
 
             if (!isDown) {
-                Intent intent = new Intent(MirrorSeptaTravelAlert.this, MirrorSeptaStationStatus.class);
+                Intent intent = new Intent(MirrorSeptaStationStatus.this, MirrorWithings.class);
                 startActivity(intent);
                 return;
             }
@@ -246,9 +246,9 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
                 FlicButton button = manager.completeGrabButton(requestCode, resultCode, data);
                 if (button != null) {
                     button.registerListenForBroadcast(FlicBroadcastReceiverFlags.UP_OR_DOWN | FlicBroadcastReceiverFlags.REMOVED);
-                    Toast.makeText(MirrorSeptaTravelAlert.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MirrorSeptaStationStatus.this, "Grabbed a button", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MirrorSeptaTravelAlert.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MirrorSeptaStationStatus.this, "Did not grab any button", Toast.LENGTH_SHORT).show();
                 }
             }
         });

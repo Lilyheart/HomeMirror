@@ -60,6 +60,11 @@
             android:parentActivityName="com.morristaedt.mirror.MirrorSeptaTravelAlert"
             android:screenOrientation="sensorLandscape" />
         <activity
+            android:name=".MirrorSeptaStationStatus"
+            android:launchMode="standard"
+            android:parentActivityName="com.morristaedt.mirror.MirrorSeptaStationStatus"
+            android:screenOrientation="sensorLandscape" />
+        <activity
             android:name=".MirrorWithings"
             android:launchMode="standard"
             android:parentActivityName="com.morristaedt.mirror.MirrorActivity"
