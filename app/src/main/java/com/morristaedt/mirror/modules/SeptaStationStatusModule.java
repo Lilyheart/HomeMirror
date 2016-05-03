@@ -71,13 +71,20 @@ public class SeptaStationStatusModule {
 
                     septaTrainHeader = septaTrainHeader.replace(": ", "\n as of ");
 
+                    String northDepart = northbound.get("depart_time").getAsString();
+                    northDepart = northDepart.replace("  "," ");
+                    northDepart = northDepart.replaceAll(":[0-9]{2}:[0-9]{3}"," ");
+                    String southDepart = southbound.get("depart_time").getAsString();
+                    southDepart = southDepart.replace("  "," ");
+                    southDepart = southDepart.replaceAll(":[0-9]{2}:[0-9]{3}"," ");
+
                     return septaTrainHeader + "\n\n" +
                             "Next Northbound\n" +
-                            "Leaving: " + northbound.get("depart_time").getAsString() + "\n" +
+                            "Leaving: " + northDepart + "\n" +
                             "Delay: " + northbound.get("status").getAsString() + "\n" +
                             "Destination: " + northbound.get("destination").getAsString() + "\n\n" +
                             "Next Southbound\n" +
-                            "Leaving: " + southbound.get("depart_time").getAsString() + "\n" +
+                            "Leaving: " + southDepart + "\n" +
                             "Delay: " + southbound.get("status").getAsString() + "\n" +
                             "Destination: " + southbound.get("destination").getAsString();
 
