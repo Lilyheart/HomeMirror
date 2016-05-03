@@ -192,7 +192,7 @@ public class MirrorWithings extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        WithingsModule.getSingleAlert(mWithingsListener);
+        WithingsModule.getWithingsDisplayInfo(getString(R.string.withings_userid), getString(R.string.withings_con_key), getString(R.string.withings_sig), getString(R.string.withings_sig_method), getString(R.string.withings_oauthtoken), getString(R.string.withings_oauthvers), mWithingsListener);
     }
 
 //    @Override
