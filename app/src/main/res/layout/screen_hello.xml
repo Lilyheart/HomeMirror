@@ -7,11 +7,10 @@
     android:orientation="horizontal">
 
     <com.morristaedt.mirror.VerticalTextView
-        style="@style/MirrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/MirrorLargeText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/default_mirror_mirror"
-        android:textSize="44sp" />
+        android:text="@string/default_mirror_mirror" />
 
 </LinearLayout>

@@ -11,7 +11,7 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/calendar_details"
-        style="@style/MirrorText"
+        style="@style/MirrorSmallText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:ellipsize="marquee"
@@ -23,7 +23,7 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/calendar_title"
-        style="@style/MirrorText"
+        style="@style/MirrorSmallText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:ellipsize="marquee"
@@ -34,7 +34,7 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/weather_summary"
-        style="@style/MirrorText"
+        style="@style/MirrorSmallText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -49,12 +49,10 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/day_text"
-        style="@style/MirrorText"
+        style="@style/MirrorSmallText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         tools:text="Sunday the 22nd"
         tools:visibility="visible" />
-
-    <!-- android:visibility="gone" -->
 
 </LinearLayout>

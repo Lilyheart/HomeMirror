@@ -8,11 +8,10 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/septa_alert"
-        style="@style/MirrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/MirrorMediumText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="44sp"
         tools:text="Generic Septa Alert" />
 
 </LinearLayout>

@@ -8,18 +8,13 @@
 
     <com.morristaedt.mirror.VerticalTextView
         android:id="@+id/withings_weight"
-        style="@style/MirrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/MirrorMediumText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="24sp"
-        tools:text="185" />
+        android:paddingTop="20px"
+        tools:text="You weigh: 189.6 lbs\nYour body fat percentage: 27.3%\nYour last weight in was: \n2 days ago." />
 
-    <com.morristaedt.mirror.VerticalTextView
-        style="@style/MirrorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/withings_current_weight" />
 
 
 </LinearLayout>
