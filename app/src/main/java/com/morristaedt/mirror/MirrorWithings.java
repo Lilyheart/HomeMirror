@@ -60,6 +60,10 @@ public class MirrorWithings extends AppCompatActivity {
         }
     };
 
+    /*
+      updates the Calender module view
+     */
+
     private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
         @Override
         public void onCalendarUpdate(String title, String details) {
@@ -74,6 +78,10 @@ public class MirrorWithings extends AppCompatActivity {
         }
     };
 
+    /*
+        Updates the forecast module view
+     */
+
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
         public void onWeatherToday(String weatherToday) {
@@ -83,6 +91,11 @@ public class MirrorWithings extends AppCompatActivity {
             }
         }
     };
+
+    /**
+     * The onCreate method runs as soon as the activity is called
+     * @param savedInstanceState
+     */
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

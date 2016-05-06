@@ -52,6 +52,8 @@ public class MirrorActivity extends AppCompatActivity {
         }
     };
 
+
+
     private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
         @Override
         public void onCalendarUpdate(String title, String details) {
@@ -65,6 +67,10 @@ public class MirrorActivity extends AppCompatActivity {
             mCalendarDetailsText.setSelected(true);
         }
     };
+
+    /**
+     * The onCreate method runs as soon as the activity is called
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -93,6 +93,11 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         }
     };
 
+    /**
+     * The onCreate method runs as soon as the activity is called
+     * @param savedInstanceState
+     */
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mirror);

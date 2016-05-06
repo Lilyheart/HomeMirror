@@ -13,6 +13,10 @@ import io.fabric.sdk.android.Fabric;
  */
 public class MirrorApplication extends Application {
 
+    /**
+     * The onCreate method runs as soon as the activity is called
+     */
+
     @Override
     public void onCreate() {
         super.onCreate();
