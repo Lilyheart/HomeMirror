@@ -20,14 +20,16 @@ import retrofit.RetrofitError;
  *
  */
 public class XKCDModule {
-
+    /** XKCDListener is called by android framework to bring up the XKCD comic
+     *
+     */
     public interface XKCDListener {
         void onNewXKCDToday(String url);
     }
 
     /**
-     * Fetch the the latest xkcd comic, but only show it if its new today
-     *
+     * The getXKCDForToday method fetches the the latest XKCD comic
+     * @param listener XKCD listener object
      */
     public static void getXKCDForToday(final XKCDListener listener) {
         new AsyncTask<Void, Void, XKCDResponse>() {
@@ -50,7 +52,7 @@ public class XKCDModule {
             @Override
             protected void onPostExecute(@Nullable XKCDResponse xkcdResponse) {
                 if (xkcdResponse != null && !TextUtils.isEmpty(xkcdResponse.img)) {
-                    if (ConfigurationSettings.isDemoMode() || isTodaysXKCD(xkcdResponse)) {
+                    if (ConfigurationSettings.isDemoMode()){
                         listener.onNewXKCDToday(xkcdResponse.img);
                         return;
                     }
@@ -58,11 +60,6 @@ public class XKCDModule {
                 listener.onNewXKCDToday(null);
             }
 
-            private boolean isTodaysXKCD(@NonNull XKCDResponse xkcdResponse) {
-                Calendar today = Calendar.getInstance();
-                //TODO uncomment original return:: return xkcdResponse.day == today.get(Calendar.DAY_OF_MONTH) && xkcdResponse.month == (today.get(Calendar.MONTH) + 1) && xkcdResponse.year == today.get(Calendar.YEAR);
-                return true;
-            }
         }.execute();
 
     }

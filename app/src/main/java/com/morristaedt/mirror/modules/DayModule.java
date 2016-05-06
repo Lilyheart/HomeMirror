@@ -12,7 +12,10 @@ import java.util.Locale;
  *
  */
 public class DayModule {
-
+    /**
+     * The getDay method returns the day of the month in a formatted markup.
+     * @return the day of the month in a formatted markup.
+     */
     public static Spanned getDay() {
         SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("EEEE", Locale.US);
         Calendar now = Calendar.getInstance();
@@ -20,6 +23,11 @@ public class DayModule {
         return Html.fromHtml(formatDayOfMonth.format(now.getTime()) + " the " + dayOfMonth + "<sup><small>" + getDayOfMonthSuffix(dayOfMonth) + "</small></sup>");
     }
 
+    /**
+     * The getDayOfMonthSuffix returns the end of the string for the day.
+     * @param n the current date of the month.
+     * @return the suffix of the current day.
+     */
     private static String getDayOfMonthSuffix(final int n) {
         if (n >= 11 && n <= 13) {
             return "th";

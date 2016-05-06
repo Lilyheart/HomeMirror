@@ -25,10 +25,23 @@ public class WithingsModule {
 
     private static String withingsDisplayInfo;
 
+    /** WithingsListener is called by android framework to bring up the Withings information
+     *
+     */
     public interface WithingsListener {
         void onNewAlert(String WithingsAlert);
     }
 
+    /**
+     * The getWithingsDisplayInfo method returns the the most recent measurements.
+     * @param withings_userid withings userID
+     * @param withings_con_key Consumer key, provided by withings when registering as a partner.
+     * @param withings_sig  OAuth signature
+     * @param withings_sig_method OAuth signature method
+     * @param withings_oauthtoken OAuth token for user authorization
+     * @param withings_oauthvers OAuth version
+     * @param withingsListener withings view Listener
+     */
     public static void getWithingsDisplayInfo(final String withings_userid, final String withings_con_key, final String withings_sig, final String withings_sig_method, final String withings_oauthtoken, final String withings_oauthvers, final WithingsListener withingsListener) {
         final String TAG = "WithingsAsyncModule";
         new AsyncTask<Void, Void, String>() {

@@ -24,14 +24,18 @@ import java.net.URL;
  */
 public class SeptaStationStatusModule {
 
-    private static String nextArrivals;            // Next five arrivals
-
-    //Updates when new station update received
+    /** SeptaListener is called by android framework to bring up the Septa information
+     *
+     */
     public interface SeptaListener {
         void onNewUpdate(String SeptaUpdate);
     }
 
-    //Returns station status information from septa
+    /**
+     * The getStationStatus returns the next departure in each direction for the selected station ID
+     * @param StationID The septa station ID number or name
+     * @param septaListener Brings up the septa view
+     */
     public static void getStationStatus(final String StationID, final SeptaListener septaListener) {
         final String TAG = "SeptaAsyncModule"; //Use to log error message
 
@@ -54,7 +58,7 @@ public class SeptaStationStatusModule {
                     HttpURLConnection request = (HttpURLConnection)url.openConnection();
                     request.connect();
 
-                    JsonParser jp = new JsonParser(); //from gson
+                    JsonParser jp = new JsonParser();
                     JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
                     JsonObject rootObj = root.getAsJsonObject();
 
@@ -64,20 +68,28 @@ public class SeptaStationStatusModule {
                     String septaTrainHeader = jreader.nextName();
 
 
-                    //JsonObject trainNext = rootObj.get(septaTrainHeader).getAsJsonObject();
+                    //the next train to arrive from both northbound and southbound
                     JsonArray trainDetail = rootObj.getAsJsonArray(septaTrainHeader);
                     JsonObject northbound = trainDetail.get(0).getAsJsonObject().getAsJsonArray("Northbound").get(0).getAsJsonObject();
                     JsonObject southbound = trainDetail.get(1).getAsJsonObject().getAsJsonArray("Southbound").get(0).getAsJsonObject();
 
+                    //replaces certain text in the septaTrainHeader
                     septaTrainHeader = septaTrainHeader.replace(": ", "\n as of ");
 
+                    //gets the depart time of the JSON object
                     String northDepart = northbound.get("depart_time").getAsString();
+                    //Cleans up double spaces
                     northDepart = northDepart.replace("  "," ");
+                    //using regular expression to remove milliseconds from the time
                     northDepart = northDepart.replaceAll(":[0-9]{2}:[0-9]{3}"," ");
+                    //gets the depart time from the json object
                     String southDepart = southbound.get("depart_time").getAsString();
+                    //cleans up double spaces
                     southDepart = southDepart.replace("  "," ");
+                    //using regular expression to remove milliseconds from the time
                     southDepart = southDepart.replaceAll(":[0-9]{2}:[0-9]{3}"," ");
 
+                    //return user friendly string of text for display
                     return septaTrainHeader + "\n\n" +
                             "Next Northbound\n" +
                             "Leaving: " + northDepart + "\n" +

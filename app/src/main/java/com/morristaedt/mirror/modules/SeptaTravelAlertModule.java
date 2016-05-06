@@ -41,12 +41,17 @@ public class SeptaTravelAlertModule {
 
     private static String textAlert;            //Alert information from Septa
 
-    //Updates when new alert received
+    /** SeptaListener is called by android framework to bring up the Septa information
+     *
+     */
     public interface SeptaListener {
         void onNewAlert(String SeptaAlert);
     }
 
-    //Returns travel alert information from septa
+    /**
+     * The getTravelAlert method return the current travel alert
+     * @param septaListener updates the SeptaAlert view
+     */
     public static void getTravelAlert(final SeptaListener septaListener) {
         final String TAG = "SeptaAsyncModule"; //Use to log error message
 

@@ -20,10 +20,17 @@ import java.util.Locale;
  *
  */
 public class CalendarModule {
+    /** CalendarListener is called by android framework to bring up the Calender view
+     *
+     */
     public interface CalendarListener {
         void onCalendarUpdate(String title, String details);
     }
-
+    /**
+     The getCalendarEvents method creates the UI thread for the calender.
+     @param context Context class gives access to global information
+     @param calendarListener
+     */
     public static void getCalendarEvents(final Context context, final CalendarListener calendarListener) {
         new AsyncTask<Void, Void, Void>() {
             String title = null;
@@ -35,7 +42,7 @@ public class CalendarModule {
             }
 
             @Override
-            protected Void doInBackground(Void... params) {
+                protected Void doInBackground(Void... params) { //Obtains the calender entries from Android calender application
                 Cursor cursor;
                 ContentResolver contentResolver = context.getContentResolver();
                 final String[] colsToQuery = new String[]{

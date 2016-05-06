@@ -29,7 +29,12 @@ public class ForecastModule {
     }
 
     /**
-     * @param apiKey   The api key for the forecast.io weather api
+     * The getForecastIOHourlyForecast method returns the current hourly forecast if the Forecast.io key was provided.
+     * @param apiKey allows android to access the forecast IO API
+     * @param units the unit of measurement for the weather
+     * @param lat the latitude of your location
+     * @param lon the longitude of your location
+     * @param listener Listener object to bring up the Forecast View
      */
     public static void getForecastIOHourlyForecast(final String apiKey, final String units, final String lat, final String lon, final ForecastListener listener) {
         new AsyncTask<Void, Void, ForecastResponse>() {
@@ -66,7 +71,12 @@ public class ForecastModule {
     }
 
     /**
-     * @param apiKey   The api key for the openweather api
+     * The getOpenWeatherForecast method returns the current hourly forecast if the Forecast.io key was provided.
+     * @param apiKey allows android to access the forecast IO API
+     * @param units the unit of measurement for the weather
+     * @param lat the latitude of your location
+     * @param lon the longitude of your location
+     * @param listener Listener object to bring up the Forecast View
      */
     public static void getOpenWeatherForecast(final String apiKey, final String units, final String lat, final String lon, final ForecastListener listener) {
         new AsyncTask<Void, Void, OpenWeatherResponse>() {
@@ -100,6 +110,12 @@ public class ForecastModule {
 
     }
 
+
+    /**
+     * The getOpenWeatherUnits method returns what type of units the weather is in.
+     * @param units celsius or fahrenheit
+     * @return the unit of measurement of measurement for the weather
+     */
     @NonNull
     private static String getOpenWeatherUnits(String units) {
         if (units.equalsIgnoreCase(ForecastRequest.UNITS_SI)) {
