@@ -10,8 +10,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

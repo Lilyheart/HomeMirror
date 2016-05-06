@@ -1,6 +1,5 @@
 package com.morristaedt.mirror;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import com.morristaedt.mirror.modules.DayModule;
 import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.receiver.AlarmReceiver;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import io.flic.lib.FlicBroadcastReceiverFlags;
@@ -43,7 +41,6 @@ public class MirrorActivity extends AppCompatActivity {
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
-    private ScreenRotation ScreenButton = new ScreenRotation();
 
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override

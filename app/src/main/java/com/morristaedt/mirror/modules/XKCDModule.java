@@ -1,7 +1,6 @@
 package com.morristaedt.mirror.modules;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,7 +9,6 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.requests.XKCDRequest;
 import com.morristaedt.mirror.requests.XKCDResponse;
 
-import java.util.Calendar;
 
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
