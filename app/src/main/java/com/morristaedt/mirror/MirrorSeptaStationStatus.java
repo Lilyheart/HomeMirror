@@ -47,6 +47,9 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
+    /*
+      updates the septa station status  module view
+     */
     private SeptaStationStatusModule.SeptaListener mSeptaListener = new SeptaStationStatusModule.SeptaListener() {
         @Override
         public void onNewUpdate(String alert) {
@@ -60,6 +63,9 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
         }
     };
 
+    /*
+      updates the Calender module view
+     */
     private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
         @Override
         public void onCalendarUpdate(String title, String details) {
@@ -73,7 +79,9 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
             mCalendarDetailsText.setSelected(true);
         }
     };
-
+    /*
+        Updates the forecast module view
+     */
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
         public void onWeatherToday(String weatherToday) {
@@ -153,15 +161,6 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
 
-        //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
-
-//        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorSeptaStationStatus.this, MirrorActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         setViewState();
     }
@@ -192,17 +191,13 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
             mCalendarDetailsText.setVisibility(View.GONE);
         }
 
-        SeptaStationStatusModule.getStationStatus(mConfigSettings.getStation(), mSeptaListener); //TODO Code station ID
+        SeptaStationStatusModule.getStationStatus(mConfigSettings.getStation(), mSeptaListener);
     }
 
-//    @Override
-//    public void onBackPressed() {
-////        super.onBackPressed();
-////        AlarmReceiver.stopMirrorUpdates(this);
-////        Intent intent = new Intent(this, SetUpActivity.class);
-////        startActivity(intent);
-//    }
 
+    /*
+        Determines when Flic button is pressed
+     */
     private void setButtonCallback(FlicButton button) {
         button.removeAllFlicButtonCallbacks();
         button.addFlicButtonCallback(buttonCallback);
@@ -222,12 +217,7 @@ public class MirrorSeptaStationStatus extends AppCompatActivity {
                 return;
             }
 
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Log.d(TAG, "Button Down");
-//                }
-//            });
+
         }
     };
 

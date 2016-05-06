@@ -47,6 +47,9 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
     private VerticalTextView mCalendarTitleText;
     private VerticalTextView mCalendarDetailsText;
 
+    /*
+    Updates the Septa travel Alert Module
+     */
     private SeptaTravelAlertModule.SeptaListener mSeptaListener = new SeptaTravelAlertModule.SeptaListener() {
         @Override
         public void onNewAlert(String alert) {
@@ -60,6 +63,9 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         }
     };
 
+    /*
+    Updates the calender module view
+     */
     private CalendarModule.CalendarListener mCalendarListener = new CalendarModule.CalendarListener() {
         @Override
         public void onCalendarUpdate(String title, String details) {
@@ -74,6 +80,9 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         }
     };
 
+    /*
+    Updates the forecast module view
+     */
     private ForecastModule.ForecastListener mForecastListener = new ForecastModule.ForecastListener() {
         @Override
         public void onWeatherToday(String weatherToday) {
@@ -153,15 +162,6 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         mCalendarDetailsText = (com.morristaedt.mirror.VerticalTextView) findViewById(R.id.calendar_details);
 
 
-        //http://stackoverflow.com/questions/18999601/how-can-i-programmatically-include-layout-in-android
-
-//        findViewById(R.id.septa_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MirrorSeptaTravelAlert.this, MirrorActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         setViewState();
     }
@@ -195,14 +195,6 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
         SeptaTravelAlertModule.getTravelAlert(mSeptaListener);
     }
 
-//    @Override
-//    public void onBackPressed() {
-////        super.onBackPressed();
-////        AlarmReceiver.stopMirrorUpdates(this);
-////        Intent intent = new Intent(this, SetUpActivity.class);
-////        startActivity(intent);
-//    }
-
     private void setButtonCallback(FlicButton button) {
         button.removeAllFlicButtonCallbacks();
         button.addFlicButtonCallback(buttonCallback);
@@ -222,12 +214,7 @@ public class MirrorSeptaTravelAlert extends AppCompatActivity {
                 return;
             }
 
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Log.d(TAG, "Button Down");
-//                }
-//            });
+
         }
     };
 

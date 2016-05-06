@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 /**
  * Created by HannahMitt on 8/23/15.
- * TODO: Find out if forecast is already integrated.  Integrate if not or remove!
+ *
  */
 public class ForecastResponse {
 
