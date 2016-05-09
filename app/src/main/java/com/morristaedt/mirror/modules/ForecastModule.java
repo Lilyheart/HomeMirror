@@ -4,15 +4,11 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.morristaedt.mirror.configuration.ConfigurationSettings;
 import com.morristaedt.mirror.requests.ForecastRequest;
 import com.morristaedt.mirror.requests.ForecastResponse;
 import com.morristaedt.mirror.requests.OpenWeatherRequest;
 import com.morristaedt.mirror.requests.OpenWeatherResponse;
-import com.morristaedt.mirror.utils.WeekUtil;
 
-import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import retrofit.RestAdapter;
