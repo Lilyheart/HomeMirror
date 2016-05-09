@@ -37,6 +37,10 @@ import io.flic.lib.FlicButtonCallbackFlags;
 import io.flic.lib.FlicManager;
 import io.flic.lib.FlicManagerInitializedCallback;
 
+/**
+ * SetUpActivity class is the activity that displays the setup screen.
+ * SetUpActivity originally by Hannah
+ */
 public class SetUpActivity extends AppCompatActivity {
 
     private static final String TAG = "SetUpActivity";
@@ -65,14 +69,19 @@ public class SetUpActivity extends AppCompatActivity {
     private EditText mStation;
     List<String> stations = new ArrayList<String>();
 
+    /**
+     * The onCreate method runs as soon as the activity is called
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        //Flic Button
+        //Flic Button Setup
         FlicManager.setAppCredentials(getString(R.string.flic_appID), getString(R.string.flic_appSecret), getString(R.string.flic_appName));
 
+        //Flic button initalized
         FlicManager.getInstance(this, new FlicManagerInitializedCallback() {
 
             @Override
@@ -102,6 +111,7 @@ public class SetUpActivity extends AppCompatActivity {
             }
         });
 
+        //Pulled all saved information from config files
         mConfigSettings = new ConfigurationSettings(this);
 
         mTemperatureChoice = (RadioGroup) findViewById(R.id.temperature_group);
